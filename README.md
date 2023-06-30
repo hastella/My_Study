@@ -210,6 +210,17 @@ Web APIs
 
 프로미스(Promise)는 비동기 함수의 반환 값을 다루기 위한 자바스크립트 객체. 비동기 함수는 프로미스를 반환할 수 있으며, 프로미스는 비동기 작업의 결과나 실패를 나타낸다.
 
+```
+function runInDelay(seconds) => { // 콜백함수는 받지 않아도 된다.
+  return new Promise(); // promise 객체를 생성해서 작업의 결과나 실패를 나타내준다.
+}
+
+runInDelay(2)
+  .then('일 수행')
+  .catch('에러 캐치')
+
+```
+
 ❗️then, catch, finally❗️
 
 The Promise object represents the eventual completion (or failure) of an asynchronous operation (비동기 수행) and its resulting value.
