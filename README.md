@@ -1,4 +1,40 @@
-# my_study
+# My_Study
+
+## HTML, CSS
+
+**HTML: Hypertext Markup Language**은 웹 페이지를 구성하는 데 사용되는 **마크업 언어**로, 웹 브라우저에게 **문서의 구조와 내용을 알려주는** 역할을 한다.
+
+```
+<!DOCTYPE html> // 문서의 형식을 정의하는 선언부
+<html>
+<head>
+  <title>My First Web Page</title>
+</head>
+<body>
+  <h1>Welcome to My Web Page</h1>
+  <p>This is a paragraph of text.</p>
+  <img src="image.jpg" alt="Image">
+  <a href="https://www.example.com">Click here</a> to visit Example.com.
+</body>
+</html>
+```
+
+❗️ script 태그를 적용하고 싶다면? body 태그 안에 제일 밑에 추가해주는 것이 일반적으로 권장된다.
+❓ 이유는?
+
+1. 페이지 로딩 시간 개선: 웹 브라우저가 HTML 문서를 파싱하고 렌더링하는 동안 스크립트 파일을 다운로드하고 실행하는 작업은 브라우저의 처리를 차단한다. 따라서, 스크립트 파일을 <body> 태그 안에 위치시키면 브라우저가 페이지의 구조와 내용을 먼저 표시한 후 스크립트를 실행하므로 사용자는 더 빠르게 페이지를 볼 수 있다.
+
+2. DOM 요소의 로딩 보장: 스크립트가 <body> 태그 안에 위치하면, 스크립트가 실행되기 전에 해당 스크립트 위에 있는 모든 DOM 요소가 로드된 상태이므로 스크립트가 실행되는 시점에는 HTML 문서의 모든 요소에 접근할 수 있으므로 예기치 않은 오류를 방지할 수 있다.
+
+```
+<script src="/examples/scripts/script_src.js" defer></script>
+```
+
+하지만 **defer** 속성을 사용하면 스크립트 파일이 다운로드되는 동안 HTML 문서의 파싱이 지연되지 않고 계속 진행되며, 스크립트 파일은 HTML 문서의 파싱이 완료된 후에 실행된다. 따라서 defer 속성을 사용하면 script 태그를 어디에 사용해도 파싱 지연을 방지하고 실행 순서를 보장해준다.
+
+**CSS: Casecading Style Sheets**을 사용하여 HTML 요소의 스타일과 레이아웃을 지정한다.
+
+## Javascript
 
 ### App
 
@@ -59,7 +95,6 @@ Heap이 아닌 원시 타입을 저장해두는 Data, Stack 메모리 셀에는 
 
 🗂 #getter(get()), #setter(set()), #privateField(#), #extends(상속), #super, #static
 <br>
-
 
 #### Shallow Copy 얕은 복사 : 객체는 메모리 주소를 전달한다!!
 
@@ -190,13 +225,12 @@ Javascript Runtime Environment, 하나의 싱글 컨텍스트 스택: 싱글 쓰
 자바스크립트 런타임 환경에서 제공해주는 다양한 API들을 사용할 수 있다.
 
 Web APIs
+
 - Dom API
 - setTimeout
 - setInterval
 - fetch
 - eventListener
-
-
 
 위와 같은 웹 API들은 비동기적으로 실행한다. 즉, 멀티 쓰레드 환경에서 발생해서 다양한 일들을 동시 다발성으로 처리해준다. 비동기 API 함수들은 특정 작업을 수행하고 그 결과를 기다리지 않고 즉시 반환해준다. 대신, 해당 작업은 백그라운드에서 비동기적으로 실행된다.
 비동기 API 함수들은 주로 네트워크 요청, 파일 시스템 접근, 데이터베이스 쿼리 등과 같이 시간이 걸리는 작업을 처리하는 데 사용되는데, 이를 통해 웹 애플리케이션에서 동시에 여러 작업을 처리하거나 더 나은 사용자 경험을 제공할 수 있다.<br>
