@@ -380,10 +380,16 @@ console.log(obj); // { name: 'stella', age: 21, eat: [Function: eat] }
 🗂 #stringify, #parse
 <br>
 
-### Response.json()
+### JSON (Javascript Object Notation)
 
-JS 객체로 변환해준다.
+- JSON.parse(string): JSON을 객체로 변환
+- JSON.stringify(객체 변수): 객체를 JSON으로 변환
 
+그렇다면 연동 작업을 할때 fetch API response 데이터를 객체로 받고 싶을때는?
+
+### Response.json(): JS 객체로 변환해준다.
+
+json() 메소드를 사용할 때, 실제로 JSON 데이터를 얻는 것이 아니라, JSON 데이터를 입력으로 사용하여 JavaScript 객체의 형태로 파싱한 결과를 얻게 된다! 이때 Response.json() 메서드는 response가 JSON 형식으로 되어 있을 것으로 가정하고, 그에 맞게 파싱을 시도해준다.<br>
 ❗️ Note that despite the method being named json(), the result is **not JSON** but is instead the result of taking JSON as input and parsing it to produce a **JS object**.
 
 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
