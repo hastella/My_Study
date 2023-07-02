@@ -35,7 +35,7 @@
 하지만 **defer** 속성을 사용하면 스크립트 파일이 다운로드되는 동안 HTML 문서의 파싱이 지연되지 않고 계속 진행되며, 스크립트 파일은 HTML 문서의 파싱이 완료된 후에 실행된다. 따라서 defer 속성을 사용하면 script 태그를 어디에 사용해도 파싱 지연을 방지하고 실행 순서를 보장해준다.
 
 **CSS: ⤵ Cascading Style Sheets**을 사용하여 HTML 요소의 스타일과 레이아웃을 지정한다. <br>
-❓ cascading: 계단식의, 폭포처럼
+❓ cascading: 계단식의, 폭포처럼<br>
 ❗️ 스타일 규칙을 **우선순위를 가진채 계단식**으로 적용하고, **상위 요소에서 하위 요소로 폭포처럼** 퍼져나가는 즉, 상위 요소에 적용된 스타일이 하위 요소에도 적용되는!
 
 - styled-components는 JavaScript 코드 안에서 CSS를 작성하는 방식으로, 컴포넌트 단위로 스타일을 정의하고 적용. JavaScript 코드가 실행될 때 해당 스타일이 동적으로 생성되고, 최종적으로 브라우저에서 렌더링된다.<br>
@@ -142,7 +142,7 @@ var functionName = function(parameters) {
 JS 엔진 (번역기, Interpreter)이 코드를 실행하기 전, 변수, 함수, 클래스의 선언문을 **끌어 올리는 것**을 말한다.
 
 - 변수의 선언과 초기화를 분리한 후, **선언만 코드의 최상단**으로 옮김<br>
-  ![IMG_9516873227D0-1](https://github.com/hastella/Javascript_Review/assets/66244752/5950709d-f3a2-4557-aa64-6213790e4502)
+![image](https://github.com/hastella/My_Study/assets/66244752/bf82963c-0883-471a-be75-ba23ad770f59)
 
 - 변수(let, const)와 클래스는 선언만 호이스팅이 되고, 초기화는 안된다.
 
@@ -351,6 +351,7 @@ object 객체와 아주 유사하여 Map을 객체처럼, 객체를 Map처럼 �
 ### 비동기: 동시에 발생하지 않는다!
 
 Javascript Runtime Environment, 하나의 싱글 컨텍스트 스택: 싱글 쓰레드 (Single Thread)
+![image](https://github.com/hastella/My_Study/assets/66244752/f15529d2-2759-4c4e-a442-fbcb6382ccc2)
 
 함수를 실행할 때 어떤 순서대로 동작해줄지는 call Stack에 의해 결정된다. 따라서, **자바스크립트는 기본적으로 동기적으로 진행된다.** 하지만, 동기적으로 함수가 진행되는 경우에는, 만일 함수 하나의 실행 속도가 길어지는 경우 다른 함수의 실행에도 지장을 주게 되기 때문에, 비동기적인 작업을 처리해야 할 때는 비동기 API 함수들을 사용해주는 것이 좋다.
 
@@ -573,19 +574,21 @@ JS 에서는 객체 지향 프로그래밍을 위해 프로토타입을 사용�
 
 JS 에서의 모든 객체들은 Object라는 프로토타입을 가지고 있다.
 
-<img width="208" alt="Screen Shot 2023-06-19 at 1 02 19 AM" src="https://github.com/hastella/Javascript_Review/assets/66244752/d4ca0bb3-54bb-4b6f-bfdc-06b7845be561">
+![image](https://github.com/hastella/My_Study/assets/66244752/fdcce75c-dc2a-4be1-b297-a21942bd8337)
+
 
 모든 JS 객체는 내부에 숨겨진 Prototype을 가지고 있다.
 
 - 객체에서 공통적으로 쓰이는 함수를 Object라는 프로토타입을 만들어, 손쉽게 객체간 상속을 할 수 있다.
 
 모든 JS 객체는 개별적으로 프로토타입을 상속하는 것이 아닌, 동일한 (단 하나의) Object 프로토타입을 상속한다.
-<img width="268" alt="Screen Shot 2023-06-19 at 1 08 56 AM" src="https://github.com/hastella/Javascript_Review/assets/66244752/ff8d03e3-b9d8-4ebf-92c1-6e74dd685ca7">
+![image](https://github.com/hastella/My_Study/assets/66244752/1c40f2f7-7600-41a8-a593-9d7c349cb9a9)
 
-![IMG_B621B8D6F6F2-1](https://github.com/hastella/Javascript_Review/assets/66244752/aac23520-e2bc-4dbd-b8d0-9c383a310dcb)
+
+![image](https://github.com/hastella/My_Study/assets/66244752/7579f0d6-7f3f-4770-90fd-97c8a5020cc9)
 
 객체간 상속의 연결 고리는 **프로토타입 체인**으로 연결 되어 있다.
-![IMG_91FA0118BC3D-1](https://github.com/hastella/Javascript_Review/assets/66244752/0736decf-4c92-4c07-a630-b6e4a06f97db)
+![image](https://github.com/hastella/My_Study/assets/66244752/8cd6b537-f96e-432e-9394-e0f96262289e)
 
 <br>
 
