@@ -115,6 +115,104 @@ Heap이 아닌 원시 타입을 저장해두는 Data, Stack 메모리 셀에는 
 - 높은 가독성
 
 ❗️함수의 이름은 함수를 참조하고 있다. (이름은 data/stack에 저장, 함수는 heap에 저장)
+
+#### 함수의 선언식과 표현식
+
+**선언식**은 코드의 어디에서든 호출될 수 있으며, 호이스팅(hoisting)에 의해 선언부가 먼저 처리되어 함수를 선언하기 전에 호출해도 동작한다!
+
+```
+functionName() // 함수 호출
+function functionName(parameters) {
+  // 함수 동작 내용
+}
+```
+
+**표현식**은 변수에 함수를 할당하는 형태로 사용된다. 즉, 코드 실행 중에(런타임) 함수가 할당되기 때문에, 호이스팅되지 않는다. 때문에 변수에 할당되기 전에 호출하면 에러가 발생한다.
+
+```
+functionName() // 에러 발생
+var functionName = function(parameters) {
+  // 함수 동작 내용
+};
+```
+
+<br>
+### ⬆️ 🆙 Hoisting 호이스팅
+
+JS 엔진 (번역기, Interpreter)이 코드를 실행하기 전, 변수, 함수, 클래스의 선언문을 **끌어 올리는 것**을 말한다.
+
+- 변수의 선언과 초기화를 분리한 후, **선언만 코드의 최상단**으로 옮김<br>
+  ![IMG_9516873227D0-1](https://github.com/hastella/Javascript_Review/assets/66244752/5950709d-f3a2-4557-aa64-6213790e4502)
+
+- 변수(let, const)와 클래스는 선언만 호이스팅이 되고, 초기화는 안된다.
+
+```
+
+console.log(hi);
+// ReferenceError: Cannot access 'hi' before initialization
+let hi = "hi";
+
+const cat = new Cat();
+// ReferenceError: Cannot access 'Cat' before initialization
+class Cat {}
+
+```
+
+- 변수 할당 시, let 은 재할당이 필수로 필요한 경우에
+  -> 가능한 const를 사용하는 것이 좋다!
+  <br>
+
+### 💩 var의 단점
+
+1. 변수 선언하는 키워드가 없이 선언 & 할당이 가능함
+
+- 선언인지, 재할당인지 구분하기 어렵다
+
+```
+
+something = "something";
+console.log(something);
+
+```
+
+2. 중복 선언이 가능함
+
+```
+
+var poo = "💩";
+var poo = "💩💩";
+console.log(poo);
+
+```
+
+let은 같은 변수명으로 재선언 할 경우 에러가 발생한다.
+
+    let num = 0;
+    let num = 1;
+    console.log(num);
+    // SyntaxError: Identifier 'num' has already been declared
+
+3. 블록 스코프를
+   var apple = "🍎";
+   {
+   var apple = "사과";
+   }
+   console.log(apple); // 사과
+
+원래대로라면 블록 스코프 외부의 변수의 값을 호출해 주어야 하지만 var는 블록 스코프를 무시하고, 블록 스코프 내부의 변수의 값을 호출해 준다.
+
+4. 의외로? 함수 레벨 스코프만 지원 된다.
+
+```
+
+function example() {
+var dog = "🐶";
+}
+console.log(dog); // ReferenceError: dog is not defined
+
+```
+
+함수 내에서 선언된 var를 외부에서 호출 시도할 경우 referenceError가 발생한다.
 <br>
 
 ### Class 클래스: 객체를 생성할 수 있는 템플릿 (틀)
@@ -439,84 +537,6 @@ const local = 1;
 - 환경 레코드 Environment Record : 각각의 블록이 어떤 데이터를 가지고 있는지?
 - 외부 환경 참조 Outer Lexical Environment Reference : 각각의 블록의 부모는 누구인지?
   <br>
-
-### ⬆️ 🆙 Hoisting 호이스팅
-
-JS 엔진 (번역기, Interpreter)이 코드를 실행하기 전, 변수, 함수, 클래스의 선언문을 **끌어 올리는 것**을 말한다.
-
-- 변수의 선언과 초기화를 분리한 후, **선언만 코드의 최상단**으로 옮김<br>
-  ![IMG_9516873227D0-1](https://github.com/hastella/Javascript_Review/assets/66244752/5950709d-f3a2-4557-aa64-6213790e4502)
-
-- 변수(let, const)와 클래스는 선언만 호이스팅이 되고, 초기화는 안된다.
-
-```
-
-console.log(hi);
-// ReferenceError: Cannot access 'hi' before initialization
-let hi = "hi";
-
-const cat = new Cat();
-// ReferenceError: Cannot access 'Cat' before initialization
-class Cat {}
-
-```
-
-- 변수 할당 시, let 은 재할당이 필수로 필요한 경우에
-  -> 가능한 const를 사용하는 것이 좋다!
-  <br>
-
-### 💩 var의 단점
-
-1. 변수 선언하는 키워드가 없이 선언 & 할당이 가능함
-
-- 선언인지, 재할당인지 구분하기 어렵다
-
-```
-
-something = "something";
-console.log(something);
-
-```
-
-2. 중복 선언이 가능함
-
-```
-
-var poo = "💩";
-var poo = "💩💩";
-console.log(poo);
-
-```
-
-let은 같은 변수명으로 재선언 할 경우 에러가 발생한다.
-
-    let num = 0;
-    let num = 1;
-    console.log(num);
-    // SyntaxError: Identifier 'num' has already been declared
-
-3. 블록 스코프를
-   var apple = "🍎";
-   {
-   var apple = "사과";
-   }
-   console.log(apple); // 사과
-
-원래대로라면 블록 스코프 외부의 변수의 값을 호출해 주어야 하지만 var는 블록 스코프를 무시하고, 블록 스코프 내부의 변수의 값을 호출해 준다.
-
-4. 의외로? 함수 레벨 스코프만 지원 된다.
-
-```
-
-function example() {
-var dog = "🐶";
-}
-console.log(dog); // ReferenceError: dog is not defined
-
-```
-
-함수 내에서 선언된 var를 외부에서 호출 시도할 경우 referenceError가 발생한다.
-<br>
 
 ### Strict Mode 엄격모드
 
