@@ -1,8 +1,6 @@
-# My_Study
-
 #### 🤓 고민하고 공부하며 기록하는 페이지!
 
-## HTML, CSS
+# HTML, CSS
 
 **HTML: Hypertext Markup Language**은 웹 페이지를 구성하는 데 사용되는 **마크업 언어**로, 웹 브라우저에게 **문서의 구조와 내용을 알려주는** 역할을 한다.
 
@@ -38,9 +36,10 @@
 **CSS: ⤵ Cascading Style Sheets**을 사용하여 HTML 요소의 스타일과 레이아웃을 지정한다. <br>❓ cascading: 계단식의, 폭포처럼<br>❗️ 스타일 규칙을 **우선순위를 가진채 계단식**으로 적용하고, **상위 요소에서 하위 요소로 폭포처럼** 퍼져나가는 즉, 상위 요소에 적용된 스타일이 하위 요소에도 적용된다!
 
 **styled-components**는 JavaScript 코드 안에서 CSS를 작성하는 방식으로, 컴포넌트 단위로 스타일을 정의하고 적용. JavaScript 코드가 실행될 때 해당 스타일이 동적으로 생성되고, 최종적으로 브라우저에서 렌더링된다.<br>**Tailwind CSS**는 CSS 클래스를 사용하여 스타일을 적용하는 방식으로, 미리 정의된 클래스를 HTML 요소에 적용. Tailwind CSS는 사전에 정의된 클래스의 집합을 제공하며, 이를 조합하여 필요한 스타일을 쉽게 적용할 수 있다.<br>
+
 ❓ 그럼 이 두 방식은 브라우저 렌더링 과정을 거칠때 css와 같은 원리를 거칠까?<br>❗️ 그렇다! styled-components와 Tailwind CSS는 CSS 코드를 더 효율적이고 생산적으로 작성하고 관리할 수 있게 도와주는 도구다. 브라우저 렌더링의 원리는 역시 동일하게 적용된다!<br>
 
-## WEB
+# WEB
 
 #### 브라우저 렌더링 원리
 
@@ -61,7 +60,7 @@
 병합 및 레이어 생성: 페인트된 요소들은 필요에 따라 레이어로 분리되고, 필요한 경우 레이어들이 병합되어 최종 화면에 출력된다.<br>반응성 및 재랜더링: 사용자의 입력이나 JavaScript에 의한 이벤트 등의 변화가 발생하면, 해당 요소나 영역만 다시 렌더링되어 변경된 내용이 반영된다.
 <br>
 
-## Javascript
+# Javascript
 
 ### App
 
@@ -107,7 +106,7 @@ const obj = new Object();
 ```
 
 **property**는 key와 value의 조합이다.
-property 중 행동을 나타내는 것은 method라고 한다.
+property 중 값을 함수로 가지는 것을 method라고 한다.
 
 ```
 person = {
@@ -131,9 +130,8 @@ Heap이 아닌 원시 타입을 저장해두는 Data, Stack 메모리 셀에는 
 
 #### Shallow Copy 얕은 복사 : 객체는 메모리 주소를 전달한다!!
 
-자바스크립트에서 복사할 때에는 항상 얕은 복사가 이루어진다. Array.from, concat, slice, spread(...), Object.assign 등은 얕은 복사를 한다. 얕은 복사는 객체의 메모리 주소를 복사하기 때문에, 원본 객체의 값이 바뀌면 복사된 객체의 값도 바뀐다. 따라서 인자로 전달된 객체가 있다면 함수 내에서 객체를 직접 수정하는 것은 ❗️절대❗️ 좋지않다.
-❓ 그럼 얕은 복사가 아닌 복사 후 원본과 복사본이 서로 아무런 영향을 주지 않도록 독립성을 가진 복사본을 만들고 싶다면 어떻게 해야할까?
-❗️ 그럴땐 깊은 복사를 통해 독립성을 보장하며 복사해줄 수 있다!
+자바스크립트에서 복사할 때에는 항상 얕은 복사가 이루어진다. Array.from, concat, slice, spread(...), Object.assign 등은 얕은 복사를 한다. 얕은 복사는 객체의 메모리 주소를 복사하기 때문에, 원본 객체의 값이 바뀌면 복사된 객체의 값도 바뀐다. 따라서 인자로 전달된 객체가 있다면 함수 내에서 객체를 직접 수정하는 것은 ❗️절대❗️ 좋지않다.<br>
+❓ 그럼 얕은 복사가 아닌 복사 후 원본과 복사본이 서로 아무런 영향을 주지 않도록 독립성을 가진 복사본을 만들고 싶다면 어떻게 해야할까?<br>❗️ 그럴땐 깊은 복사를 통해 독립성을 보장하며 복사해줄 수 있다!
 <br>
 
 #### Deep Copy 깊은 복사
@@ -445,83 +443,26 @@ const promise = new Promise(function(resolve, reject)) {
 **즉, 프로미스는 비동기 함수의 반환 값을 처리하기 위한 자바스크립트 객체이며, 비동기 작업의 성공과 실패를 나타낸다. 프로미스는 비동기 작업을 보다 편리하게 다룰 수 있도록 도와주는 패턴이며, .then()과 .catch()를 사용하여 결과와 오류를 처리할 수 있다.**
 <br />
 
-**📚 Promise.race & Promise.all & Promise.allSettled**
-
-- Promise.race
-  실행되는 Promise중 가장 빠른 하나를 호출하고 싶을 때
-
-- Promise.all
-  실행되는 Promise중 성공적인 결과값만 호출하고 싶을 때
-
-- Promise.allSettled
-  실행되는 Promise의 모든 결과값을 호출하고 싶을 때
-
-🗂 #Promise.race, #Promise.all, #Promise.allSettled
-
-<br>
-
 #### async & await
 
 프로미스의 개념을 사용한 문법이지만, 보다 가독성 있게 코드를 표현할 수 있다.
 비동기로 사용할 함수앞에 async 키워드를 붙여주면, 해당 함수는 항상 프로미스를 반환하게 된다.
 -> 비동기 함수를 호출하면서 호출코드 앞에 await를 붙여주면, 프로미스가 값을 반환하기를 기다렸다가 반환된 값을 변수에 할당해준다.
+<br>
 
 ### JSON: Javascript Object Notation
 
-서버와 클라이언트(브라우저, 모바일) 간의 HTTP 통신을 위한 오브젝트 형태의 텍스트 포맷
+💡 data interchange format
+JSON은 텍스트 형식을 사용하며, 주로 서버와 클라이언트 간의 HTTP 통신을 위해 사용된다. JSON을 객체 형태로 변환할 수 있으며, 객체 형태를 JSON으로 변환할 수도 있다.
 
-- stringify(object): JSON
-- parse(JSON): object
+**JSON.parse(string)**: JSON을 객체로 변환
+**JSON.stringify(객체 변수)**: 객체를 JSON으로 변환
 
-```
-
-const stella = {
-name: "stella",
-age: 21,
-eat: () => {
-console.log("eat");
-},
-};
-
-```
-
-1. Object to JSON: **stringify**
-
-Serializing (직렬화) : 데이터를 일렬로 늘어선 문자열로 변환하는 것
-
-```
-
-const json = JSON.stringify(stella); // JSON으로 변환
-console.log(stella); // { name: 'stella', age: 21, eat: [Function: eat] }
-console.log(json); // {"name":"stella","age":21}
-
-```
-
-함수 자체는 JSON에 포함되지 않음.
-함수는 오브젝트에 있는 데이터가 아니기 때문에 제외됨.
-
-2. JSON to Object: **parse**
-
-Deserializing (역직렬화) : 일렬로 늘어선 문자열을 자바스크립트 객체로 변환하는 것
-
-```
-
-const obj = JSON.parse(json);
-console.log(obj); // { name: 'stella', age: 21, eat: [Function: eat] }
-
-```
-
-🗂 #stringify, #parse
+❓ 그렇다면 연동 작업을 할때 fetch API response 데이터를 객체로 받고 싶을때는?
+❗️ Response.json( )을 통해 객체형태로 변환할 수 있다!
 <br>
 
-### JSON (Javascript Object Notation)
-
-- JSON.parse(string): JSON을 객체로 변환
-- JSON.stringify(객체 변수): 객체를 JSON으로 변환
-
-그렇다면 연동 작업을 할때 fetch API response 데이터를 객체로 받고 싶을때는?
-
-### Response.json(): JS 객체로 변환해준다.
+### Response.json( ): JS 객체로 변환해준다.
 
 json() 메소드를 사용할 때, 실제로 JSON 데이터를 얻는 것이 아니라, JSON 데이터를 입력으로 사용하여 JavaScript 객체의 형태로 파싱한 결과를 얻게 된다! 이때 Response.json() 메서드는 response가 JSON 형식으로 되어 있을 것으로 가정하고, 그에 맞게 파싱을 시도해준다.<br>
 ❗️ Note that despite the method being named json(), the result is **not JSON** but is instead the result of taking JSON as input and parsing it to produce a **JS object**.
@@ -531,17 +472,14 @@ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 
 ### Scope 스코프
 
-- 변수를 참조할 수 있는 (접근할 수 있는) 유효한 범위
-- 식별자 (변수, 함수, 클래스 이름) 가 유효한 범위
-- 따라서, 선언된 위치에 따라 유효 범위가 결정된다.
-  <br>
-  {
-  블럭 안의 변수는 **블럭 안**에서만 유효
-  }
-  <br>
-- 지역 스코프는 함수가 종료되면 메모리에서 사라진다.
-  변수, 함수, 클래스 이름 충돌을 방지할 수 있으며, 메모리를 절약해줄 수 있다.
-  ❗️ 변수는 최대한 필요한 곳에서 정의해 주는것이 좋다 ❗️
+변수를 참조할 수 있는 (접근할 수 있는) 유효한 범위이며, 식별자 (변수, 함수, 클래스 이름)가 유효한 범위를 나타낸다. 따라서, 선언된 위치에 따라 유효 범위가 결정된다.
+{
+블럭 안의 변수는 **블럭 안**에서만 유효
+}
+
+**지역 스코프**는 함수가 종료되면 메모리에서 사라진다.
+변수, 함수, 클래스 이름 충돌을 방지할 수 있으며, 메모리를 절약해줄 수 있다.
+❗️ 변수는 최대한 필요한 곳에서 정의해 주는것이 좋다 ❗️
 
 🗂 #전역 변수, #전역 스코프, #지역 변수, #지역 스코프
 <br>
@@ -659,56 +597,48 @@ A closure is the combination of a **function** bundled tgt (enclosed) w/ referen
 
 ### This : JS에서 문맥에 따라 this가 가리키는 것이 달라진다.
 
-자바, C#, C++ 대부분의 객체지향 프로그래밍 언어에서는 this는 항상 자신의 인스턴스 자체르 가리킨다. 정적으로 인스턴스가 만들어지는 시점에 this가 바인딩된다.
+자바, C#, C++ 대부분의 객체지향 프로그래밍 언어에서는 this는 항상 자신의 인스턴스 자체를 가리킨다. 정적으로 인스턴스가 만들어지는 시점에 this가 바인딩된다.
 
-하지만 **자바스크립트에서는 this가** 다른 언어와 다르게 동작한다. JS에서는 누가 호출하냐에 따라서 this가 달라진다. this는 함수가 호출되는 시점에 **동적으로 바인딩**된다.
+하지만 자바스크립트에서는 this가 다른 언어와 다르게 동작한다. JS에서는 누가 호출하냐에 따라서 this가 달라진다. this는 함수가 호출되는 시점에 **동적으로 바인딩**된다.
 <br>
 
 ```
-
 function Cat(name) {
-this.name = name;
-this.printName = function () {
-console.log(`고양이 이름 출력!: ${this.name}`);
-};
+  this.name = name;
+  this.printName = function () {
+    console.log(`고양이 이름 출력!: ${this.name}`);
+  };
 }
 
 function Dog(name) {
-this.name = name;
-this.printName = function () {
-console.log(`강아지 이름 출력!: ${this.name}`);
-};
+  this.name = name;
+  this.printName = function () {
+    console.log(`강아지 이름 출력!: ${this.name}`);
+  };
 }
-
 ```
 
 ```
-
 const cat = new Cat("냥이");
 const dog = new Dog("상츄");
 cat.printName();
 dog.printName();
-
 ```
 
 ```
-
 dog.printName = cat.printName; // this가 cat을 가리키게 된다.
 dog.printName(); // 고양이 이름 출력!: 상츄
 cat.printName(); // 고양이 이름 출력!: 냥이
-
 ```
 
 <br>
 
-❓ 왜 이런 일이 발생할까?
-JS에서는 함수를 호출할 때, 함수를 호출한 주체를 this로 바인딩한다.
+❓ 왜 이런 일이 발생할까?<br>❗️ JS에서는 함수를 호출할 때, 함수를 호출한 주체를 this로 바인딩한다.
 그래서 dog.printName()을 호출하면 dog가 this가 되고, cat.printName()을 호출하면 cat이 this가 된다.
 그래서 dog.printName = cat.printName;을 했을 때, dog.printName()을 호출하면 this가 cat을 가리키게 된다.
 <br>
-❓ 그럼 어떻게 하면 this가 항상 자신의 인스턴스를 가리키게 할 수 있을까?
-그럴 때 사용하는 것이 바로 화살표 함수이다. 화살표 함수는 this를 바인딩하지 않는다.
-<br><br>
+❓ 그럼 어떻게 this가 항상 자신의 인스턴스를 가리키게 할 수 있을까?<br>❗️ 화살표 함수! 화살표 함수는 this를 바인딩하지 않는다.
+<br>
 
 ### → 화살표 함수
 
@@ -776,6 +706,7 @@ parent.addEventListener('click', function(event) {
 각 버튼태그에 이벤트 리스너를 주는게 아니라 하나의 이벤트 리스너를 부모 요소에 줘서 적용시켜준다.
 
 즉, 이벤트 위임을 사용하여 하나의 이벤트 리스너로 여러개의 자식 요소를 다룰 수 있다. 이는 코드를 더 간결하게 해주며 특히 많은 자식 요소를 다뤄야 할때 효율성을 높일 수 있다!
+<br>
 
 ### Web Storage 웹 스토리지
 
@@ -785,3 +716,4 @@ parent.addEventListener('click', function(event) {
 - **세션 스토리지**: 같은 탭 내에서만 유지되는 데이터
 
 **쓰기 (setItem), 접근 (getItem), 삭제 (removeItem)**
+<br>
