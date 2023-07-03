@@ -470,6 +470,33 @@ json() 메소드를 사용할 때, 실제로 JSON 데이터를 얻는 것이 아
 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 <br>
 
+### 프로토타입 객체란? : original, sample
+
+❓ 프로토타입 객체를 사용하는 주된 이유는? ❗️**상속** 개념을 통한 **코드 재사용**
+프로토타입은 객체 간에 속성과 메서드를 공유하는 방식으로 동작하며, 이를 통해 상속 개념을 구현할 수 있다.
+Java, C++과 같은 클래스 기반 객체지향 프로그래밍 언어와 달리 **자바스크립트는 프로토타입 기반 객체지향 프로그래밍 언어**이다. 클래스 기반 객체지향 프로그래밍 언어는 객체 생성 이전에 클래스를 정의하고 이를 통해 객체(인스턴스)를 생성한다. 하지만 프로토타입 기반 객체지향 프로그래밍 언어 (자바스크립트)는 클래스 없이도 객체를 생성할 수 있다.
+
+JS 에서의 모든 객체들은 Object라는 프로토타입을 가지고 있다.
+
+![image](https://github.com/hastella/My_Study/assets/66244752/fdcce75c-dc2a-4be1-b297-a21942bd8337)
+
+객체에서 공통적으로 쓰이는 함수를 Object라는 프로토타입을 만들어, 손쉽게 **객체간 상속**을 할 수 있다. 이때, 모든 JS 객체는 개별적으로 프로토타입을 상속하는 것이 아닌, 동일한 (단 하나의) Object 프로토타입을 **상속**한다.
+![image](https://github.com/hastella/My_Study/assets/66244752/1c40f2f7-7600-41a8-a593-9d7c349cb9a9)
+
+![image](https://github.com/hastella/My_Study/assets/66244752/7579f0d6-7f3f-4770-90fd-97c8a5020cc9)
+
+객체간 상속의 연결 고리는 **프로토타입 체인**으로 연결 되어 있다.
+![image](https://github.com/hastella/My_Study/assets/66244752/8cd6b537-f96e-432e-9394-e0f96262289e)
+
+<br>
+
+### 인스턴스 vs. 프로토타입 레벨
+
+프로토타입 레벨의 함수는 인스턴스 레벨의 함수와 달리 메모리를 공유한다.
+그렇기 때문에 인스턴스 레벨의 함수는 인스턴스마다 메모리를 할당받아서 메모리를 많이 차지하지만, **프로토타입 레벨의 함수는** 메모리를 공유하기 때문에 **메모리를 적게 차지**한다.
+❗️그렇기 때문에 프로토타입 레벨의 함수를 사용하는 것이 좋다❗️
+<br>
+
 ### Scope 스코프
 
 변수를 참조할 수 있는 (접근할 수 있는) 유효한 범위이며, 식별자 (변수, 함수, 클래스 이름)가 유효한 범위를 나타낸다. 따라서, 선언된 위치에 따라 유효 범위가 결정된다.
@@ -482,6 +509,17 @@ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 ❗️ 변수는 최대한 필요한 곳에서 정의해 주는것이 좋다 ❗️
 
 🗂 #전역 변수, #전역 스코프, #지역 변수, #지역 스코프
+<br>
+
+### 🚀 Closure 클로저
+
+A closure is the combination of a **function** bundled tgt (enclosed) w/ references to its surrounding state (**lexical environment**)
+
+:함수가 선언된 환경의 스코프를 기억하여 함수가 스코프 밖에서 실행될 때에도 기억한 스코프에 접근할 수 있게 만드는 문법
+
+- a closure gives you access to an outer function's scope from an inner function. **내부함수에서 외부함수 접근 가능**
+
+**❗️클로저를 잘 알아야하는 이유는 유용하게 사용하기보단 알기 힘든 버그를 잘 수정하기 위해서❗️**
 <br>
 
 ### 🗑 Garbage Collector 가비지 컬렉터
@@ -511,89 +549,6 @@ const local = 1;
 - 환경 레코드 Environment Record : 각각의 블록이 어떤 데이터를 가지고 있는지?
 - 외부 환경 참조 Outer Lexical Environment Reference : 각각의 블록의 부모는 누구인지?
   <br>
-
-### Strict Mode 엄격모드
-
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-
-**'use strict'**
-리액트와 같은 프레임워크 사용시 기본적으로 엄격 모드로 설정되어 있다.
-
-```
-
-"use strict";
-var x = 1;
-// delete x;
-// SyntaxError: Delete of an unqualified identifier in strict mode.
-// strict mode를 사용하지 않는 경우에는 에러 발생 x
-
-function add(x) {
-var a = 2;
-b = a + x;
-}
-add(1);
-// ReferenceError: b is not defined
-// strict mode를 사용하지 않는 경우에는 에러 발생 x
-
-```
-
-<br>
-
-### Prototype 프로토타입
-
-JS 에서는 객체 지향 프로그래밍을 위해 프로토타입을 사용하고 있다.
-
-- 공통된 다양한 객체들의 비슷한 특징을 하나의 프로토타입으로 만들어 객체 지향 프로그래밍을 지향한다.
-
-JS 에서의 모든 객체들은 Object라는 프로토타입을 가지고 있다.
-
-![image](https://github.com/hastella/My_Study/assets/66244752/fdcce75c-dc2a-4be1-b297-a21942bd8337)
-
-모든 JS 객체는 내부에 숨겨진 Prototype을 가지고 있다.
-
-- 객체에서 공통적으로 쓰이는 함수를 Object라는 프로토타입을 만들어, 손쉽게 객체간 상속을 할 수 있다.
-
-모든 JS 객체는 개별적으로 프로토타입을 상속하는 것이 아닌, 동일한 (단 하나의) Object 프로토타입을 상속한다.
-![image](https://github.com/hastella/My_Study/assets/66244752/1c40f2f7-7600-41a8-a593-9d7c349cb9a9)
-
-![image](https://github.com/hastella/My_Study/assets/66244752/7579f0d6-7f3f-4770-90fd-97c8a5020cc9)
-
-객체간 상속의 연결 고리는 **프로토타입 체인**으로 연결 되어 있다.
-![image](https://github.com/hastella/My_Study/assets/66244752/8cd6b537-f96e-432e-9394-e0f96262289e)
-
-<br>
-
-### 객체 불변성을 위한 동결, 밀봉, 확장 금지
-
-- Object.freeze 오브젝트 동결
-  추가 ❌, 삭제 ❌, 수정 ❌, 속성 재정의 ❌ (writable: false, configurable: false 등을 재정의 하는 것 불가능)
-
-- Object.seal 오브젝트 밀봉
-  수정 ✅, 추가 ❌, 삭제 ❌, 속성 재정의 ❌
-
-- Object.preventExtensions 오브젝트 확장 금지
-  수정 ✅, 삭제 ✅, 추가 ❌
-
-🗂 #freeze, #seal, #preventExtensions
-<br>
-
-### 인스턴스 vs. 프로토타입 레벨
-
-프로토타입 레벨의 함수는 인스턴스 레벨의 함수와 달리 메모리를 공유한다.
-그렇기 때문에 인스턴스 레벨의 함수는 인스턴스마다 메모리를 할당받아서 메모리를 많이 차지하지만, **프로토타입 레벨의 함수는** 메모리를 공유하기 때문에 **메모리를 적게 차지**한다.
-❗️그렇기 때문에 프로토타입 레벨의 함수를 사용하는 것이 좋다❗️
-<br>
-
-### 🚀 Closure 클로저
-
-A closure is the combination of a **function** bundled tgt (enclosed) w/ references to its surrounding state (**lexical environment**)
-
-:함수가 선언된 환경의 스코프를 기억하여 함수가 스코프 밖에서 실행될 때에도 기억한 스코프에 접근할 수 있게 만드는 문법
-
-- a closure gives you access to an outer function's scope from an inner function. **내부함수에서 외부함수 접근 가능**
-
-**❗️클로저를 잘 알아야하는 이유는 유용하게 사용하기보단 알기 힘든 버그를 잘 수정하기 위해서❗️**
-<br>
 
 ### This : JS에서 문맥에 따라 this가 가리키는 것이 달라진다.
 
@@ -650,6 +605,33 @@ cat.printName(); // 고양이 이름 출력!: 냥이
 - 화살표 함수 외부의 arguments를 참조만 한다.
 - this에 대한 바인딩이 정적으로 결정된다.
 - 함수에서 제일 근접한 상위 스코프의 this에 정적으로 바인딩 된다.
+
+<br>
+
+### Strict Mode 엄격모드
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+
+**'use strict'**
+리액트와 같은 프레임워크 사용시 기본적으로 엄격 모드로 설정되어 있다.
+
+```
+
+"use strict";
+var x = 1;
+// delete x;
+// SyntaxError: Delete of an unqualified identifier in strict mode.
+// strict mode를 사용하지 않는 경우에는 에러 발생 x
+
+function add(x) {
+var a = 2;
+b = a + x;
+}
+add(1);
+// ReferenceError: b is not defined
+// strict mode를 사용하지 않는 경우에는 에러 발생 x
+
+```
 
 <br>
 
