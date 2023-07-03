@@ -537,13 +537,29 @@ Person.prototype.printName = function() {  // 프로토타입 레벨의 함수
 
 ### 🚀 Closure 클로저
 
-A closure is the combination of a **function** bundled tgt (enclosed) w/ references to its surrounding state (**lexical environment**)
+클로저를 통해 내부함수에서 외부함수로 접근이 가능하다.
+❓ 언제/ 어떻게 클로저를 활용하는걸까?
+❗️ 캡슐화를 통해 내부 정보를 은닉하고, 공개 함수를 통한 데이터 조작을 위해
 
-:함수가 선언된 환경의 스코프를 기억하여 함수가 스코프 밖에서 실행될 때에도 기억한 스코프에 접근할 수 있게 만드는 문법
+:함수가 선언된 환경의 스코프 (렉시컬 환경)를 기억하여 함수가 스코프 밖에서 실행될 때에도 기억한 스코프에 접근할 수 있게 만드는 문법
 
-- a closure gives you access to an outer function's scope from an inner function. **내부함수에서 외부함수 접근 가능**
+```
+function setCounter() {
+  let count = 0
+  function increase() {
+    count++;
+    console.log(count);
+  }
+  return increase
+}
 
-**❗️클로저를 잘 알아야하는 이유는 알기 힘든 버그를 잘 수정하기 위해서❗️**
+const incCounter = setCounter()
+// 내부 함수를 통해 외부 함수 렉시컬 환경의 count 변수에 접근하여 조작할 수 있다.
+incCounter()  // 1
+incCounter()  // 2
+incCounter()  // 3
+```
+
 <br>
 
 ### 🗑 Garbage Collector 가비지 컬렉터
