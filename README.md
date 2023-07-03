@@ -543,7 +543,7 @@ A closure is the combination of a **function** bundled tgt (enclosed) w/ referen
 
 - a closure gives you access to an outer function's scope from an inner function. **내부함수에서 외부함수 접근 가능**
 
-**❗️클로저를 잘 알아야하는 이유는 유용하게 사용하기보단 알기 힘든 버그를 잘 수정하기 위해서❗️**
+**❗️클로저를 잘 알아야하는 이유는 알기 힘든 버그를 잘 수정하기 위해서❗️**
 <br>
 
 ### 🗑 Garbage Collector 가비지 컬렉터
