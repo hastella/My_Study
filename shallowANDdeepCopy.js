@@ -10,8 +10,12 @@ const obj = {
 };
 
 const obj2 = Object.assign({}, obj);
-obj.b.c = 3;
-// console.log("shallowCopy", obj2); // 3으로 바뀌어있음, 얕은 복사로 인해 원본 객체의 값이 바뀌면 복사된 객체의 값도 바뀐다.
+// obj.b.c = 3;
+obj2.a = 5;
+obj2.b.c = 7;
+console.log("obj2", obj2); // obj2 { a: 5, b: { c: 7, d: { e: 3 } } }
+// 3으로 바뀌어있음, 얕은 복사로 인해 원본 객체의 값이 바뀌면 복사된 객체의 값도 바뀐다.
+console.log("obj1", obj); // obj1 { a: 1, b: { c: 7, d: { e: 3 } } } -> 1depth의 값은 안바뀌고 2depth 부터의 값은 원본객체의 값도 바뀌었다!!
 
 // 깊은 복사
 const deepCopy = (origin) => {
