@@ -1,4 +1,4 @@
-## 🤓 고민하고 공부하며 기록하는 페이지!
+# 🤓 고민하고 공부하며 기록하는 페이지!
 
 # 👾 프로그램이란?
 
@@ -57,7 +57,7 @@
 
 ## 자료구조 stack과 queue의 차이는?
 
-stack과 queue 모두 일렬로 정렬된 데이터를 다루는 자료구조이다. <br>우선 **스택은 프링글스** 통을 생각하면 이해가 쉽다! Last In First Out으로, 가장 최근에 추가된 데이터가 가장 먼제 삭제된다. push와 pop을 통해 요소를 추가/ 삭제하며, top은 스택의 맨 위에 있는 데이터를 반환한다.<br>**큐는 줄서는 사람들**을 생각하면 이해가 쉽다! First In First Out으로 가장 오래된 데이터부터 삭제된다. enqueue와 dequeue를 통해 요소를 추가/ 삭제하며, front는 맨 앞에 있는 데이터를 반환한다.
+stack과 queue 모두 일렬로 정렬된 데이터를 다루는 자료구조이다. <br>우선 **스택은 프링글스 통**을 생각하면 이해가 쉽다! Last In First Out으로, 가장 최근에 추가된 데이터가 가장 먼제 삭제된다. push와 pop을 통해 요소를 추가/ 삭제하며, top은 스택의 맨 위에 있는 데이터를 반환한다.<br>**큐는 줄서는 사람들**을 생각하면 이해가 쉽다! First In First Out으로 가장 오래된 데이터부터 삭제된다. enqueue와 dequeue를 통해 요소를 추가/ 삭제하며, front는 맨 앞에 있는 데이터를 반환한다.
 <br>
 
 ## 프로세스와 스레드란?
@@ -144,7 +144,7 @@ SPA는 하나의 HTML 페이지가 로드되고 이후에는 동적으로 데이
 
 # Javascript
 
-### App
+## App
 
 어플리케이션을 실행시킬 때 필요한 메모리의 구성요소는 아래와 같이 나눠진다.
 
@@ -154,7 +154,7 @@ SPA는 하나의 HTML 페이지가 로드되고 이후에는 동적으로 데이
 - Heap: 객체
   <br>
 
-### Variable 변수: 값을 저장하는 공간 : 자료를 저장할 수 있는 이름이 주어진 기억장소
+## Variable 변수: 값을 저장하는 공간 : 자료를 저장할 수 있는 이름이 주어진 기억장소
 
 어플리케이션을 실행하게 되면 총 세가지의 일들이 발생한다.
 
@@ -169,7 +169,7 @@ SPA는 하나의 HTML 페이지가 로드되고 이후에는 동적으로 데이
 (= 사용자에게 입력받은 데이터를 보관하여 처리를 위한 데이터 보관, 변수 선언이 필요하다.)
 <br>
 
-### Data Type
+## Data Type
 
 - 원시 primitive (단일 데이터): number, string, boolean, null, undefined, symbol
 - 객체 object (복합 데이터): 상태, 행동
@@ -178,7 +178,7 @@ SPA는 하나의 HTML 페이지가 로드되고 이후에는 동적으로 데이
 Heap에는 데이터의 크기가 정해져있지 않고, 동적으로 데이터의 저장될 수 있는 '객체' 데이터가 보관된다.
 <br>
 
-### Object 객체: 연관된 데이터를 함께 묶어서 보관할 수 있는 복합 데이터
+## Object 객체: 연관된 데이터를 함께 묶어서 보관할 수 있는 복합 데이터
 
 객체를 생성할 때는 중괄호나 생성자 함수를 통해 만들어줄 수 있다.
 
@@ -210,20 +210,20 @@ person = {
 Heap이 아닌 원시 타입을 저장해두는 Data, Stack 메모리 셀에는 객체의 변수명이 저장된다.
 <br>
 
-#### Shallow Copy 얕은 복사 : 객체는 메모리 주소를 전달한다!!
+### Shallow Copy 얕은 복사 : 객체는 메모리 주소를 전달한다!!
 
 자바스크립트에서 복사할 때에는 항상 얕은 복사가 이루어진다. Array.from, concat, slice, spread(...), Object.assign 등은 얕은 복사를 한다. 얕은 복사는 객체의 메모리 주소를 복사하기 때문에, 원본 객체의 값이 바뀌면 복사된 객체의 값도 바뀐다. 따라서 인자로 전달된 객체가 있다면 함수 내에서 객체를 직접 수정하는 것은 ❗️절대❗️ 좋지않다.<br>
 ❓ 그럼 얕은 복사가 아닌 복사 후 원본과 복사본이 서로 아무런 영향을 주지 않도록 독립성을 가진 복사본을 만들고 싶다면 어떻게 해야할까?<br>❗️ 그럴땐 깊은 복사를 통해 독립성을 보장하며 복사해줄 수 있다!
 <br>
 
-#### Deep Copy 깊은 복사
+### Deep Copy 깊은 복사
 
 얕은 복사는 참조 (메모리 주소)를 복사한다면, 깊은 복사는 객체나 배열과 같은 복합 데이터 구조를 복사하는 과정에서 객체의 내부까지 **재귀적으로 복사**하여 원본과 완전히 독립된 새로운 객체를 생성하는 것!
 깊은 복사를 수행하면 원본과 복사본 간의 **독립성**이 보장되며, 한쪽의 변경이 다른 쪽에 영향을 주지 않는다.<br>
 
 🗂 #완벽한깊은복사, #lodash, #cloneDeep
 
-### Function 함수: 특정한 일을 수행하는 코드의 집합
+## Function 함수: 특정한 일을 수행하는 코드의 집합
 
 👍🏻 유지보수성, 재사용 가능, 높은 가독성
 
@@ -232,7 +232,7 @@ Heap이 아닌 원시 타입을 저장해두는 Data, Stack 메모리 셀에는 
 **인자를 받기 위해 함수 내부에서 생성한 변수를 매개변수** 라고 한다. 이 때, 인자는 함수를 호출할 때 넘겨주는 실제 값이고, 매개변수는 이 값을 받기 위해 함수 내부에서 만들어내는 변수를 말한다. 즉, **매개변수는** 함수 내부에서만 스코프를 유지하는 **지역변수**이다.
 <br>
 
-#### 함수의 선언식과 표현식
+### 함수의 선언식과 표현식
 
 **선언식**은 호이스팅에 의해 선언부가 먼저 처리되므로 (메모리에 먼저 저장되기 때문에) 어디에서든 호출할 수 있는 특징을 가진다. 즉, 자바스크립트 코드가 실행되기 전에 함수를 모두 정의해 두기 때문에 코드의 어디에서든 호출될 수 있다.
 
@@ -254,7 +254,7 @@ var functionName = function(parameters) {
 
 <br>
 
-### ⬆️ 🆙 Hoisting 호이스팅
+## ⬆️ 🆙 Hoisting 호이스팅
 
 JS 엔진 (번역기, Interpreter)이 코드를 실행하기 전에 변수, 함수, 클래스의 선언문을 **끌어 올리는 것** (찾는다)을 말한다.
 
@@ -283,65 +283,64 @@ class Cat {}
 -> 가능한 const를 사용하는 것이 좋다!
 <br>
 
-#### 🤓 요약
+### 🤓 요약
 
 ❗️**변수 (let, const)와 클래스는 호이스팅은 되지만 선언 이전에 호출하면 에러가 발생<br> ❗️함수 선언식은 호이스팅되며 선언 이전에도 호출 가능<br> -> 자바스크립트 엔진은 코드를 실행하기 전에 함수 선언문을 찾고, 찾은 함수 선언문을 메모리에 먼저 등록하기 때문<br> ❗️함수 표현식 (화살표 함수)은 특정 변수로 받는 것이기 때문에 표현식이 정의된 시점 이후부터 접근 가능**
 <br>
 
-### 💩 var의 단점
+## 💩 var의 단점은?
 
-1. 변수 선언하는 키워드가 없이 선언 & 할당이 가능함
-
-- 선언인지, 재할당인지 구분하기 어렵다
+변수 선언하는 키워드가 없이 선언 & 할당이 가능해서 선언인지, 재할당인지 구분하기 어렵다.
 
 ```
-
 something = "something";
 console.log(something);
-
 ```
 
-2. 중복 선언이 가능함
+중복 선언이 가능하다.
 
 ```
-
-var poo = "💩";
-var poo = "💩💩";
-console.log(poo);
-
+var sangchu = "🐶";
+var sangchu = "🐶🐶";
+console.log(sangchu);
 ```
 
-let은 같은 변수명으로 재선언 할 경우 에러가 발생한다.
+var과 다르게 let은 같은 변수명으로 재선언 할 경우 에러가 발생한다.
 
     let num = 0;
     let num = 1;
     console.log(num);
     // SyntaxError: Identifier 'num' has already been declared
 
-3. 블록 스코프를
-   var apple = "🍎";
-   {
-   var apple = "사과";
-   }
-   console.log(apple); // 사과
-
 원래대로라면 블록 스코프 외부의 변수의 값을 호출해 주어야 하지만 var는 블록 스코프를 무시하고, 블록 스코프 내부의 변수의 값을 호출해 준다.
 
-4. 의외로? 함수 레벨 스코프만 지원 된다.
-
 ```
-
-function example() {
-var dog = "🐶";
+var apple = "🍎";
+{
+  var apple = "사과";
 }
-console.log(dog); // ReferenceError: dog is not defined
-
+console.log(apple); // 사과
 ```
 
-함수 내에서 선언된 var를 외부에서 호출 시도할 경우 referenceError가 발생한다.
+의외로? 함수 레벨 스코프만 지원 된다.
+
+```
+function example() {
+  var sangchu = "🐶";
+}
+console.log(sangchu); // ReferenceError: sangchu is not defined
+```
+
+함수 내에서 선언된 var를 외부에서 호출 시도할 경우 ReferenceError가 발생한다.
 <br>
 
-### Class 클래스: 객체를 생성할 수 있는 템플릿 (틀)
+## var, let, const의 차이는?
+
+**var**은 앞 주제 var의 단점에서 다루었듯이, 변수의 **재선언과 재할당이 가능**하다. 때문에 선언인지, 재할당인지 구분이 어렵다. 이러한 단점을 보완하기 위해 ES6에서 도입된 let과 const가 있는데 이 두 선언 방식은 var과 어떻게 다른걸까?<br>
+**let**은 블록 스코프를 가지는 변수 선언 방식이다. 즉, 중괄호 {}로 둘러싸인 블록 내에서만 접근이 가능하다. 따라서 호이스팅은 발생하지만 선언 이전에 변수에 접근하면 ReferenceError가 발생한다. **변수의 재할당은 가능하지만 var과 다르게 재선언은 허용되지 않는다.**<br>
+**const** 또한 let과 함께 ES6에 도입된 상수를 선언하는 방식이다. let과 동일한 블록 스코프를 가지며, 중괄호{} 안에서만 접근이 가능하다. 상수이기에 **재할당이 불가하고, 선언과 동시에 초기화 해야 한다.**
+
+## Class 클래스: 객체를 생성할 수 있는 템플릿 (틀)
 
 - 객체지향 프로그래밍 (Object - oriented Programming)
   : 프로그래밍 할때, 서로 밀접하게 연관되어 있는 요소들을 객체로 구성해 나가면서 객체끼리 서로 호환 가능하게 하는 것.
@@ -352,7 +351,7 @@ console.log(dog); // ReferenceError: dog is not defined
 🗂 #getter(get()), #setter(set()), #privateField(#), #extends(상속), #super, #static
 <br>
 
-### Higher-order function 고차함수
+## Higher-order function 고차함수
 
 고차함수는 인자로 함수를 받거나 (콜백함수) 함수를 반환하는 함수이다. 고차함수가 콜백함수를 인자로 받았다면, 함수 안에서 콜백함수가 필요할 때 호출할 수 있는 권한인 있기 때문에 높은 권한이 있다 라고 해서 Higher-order function, 고차함수로 부른다.
 
@@ -366,7 +365,7 @@ console.log(dog); // ReferenceError: dog is not defined
 🗂 #map, #reduce, #filter
 <br>
 
-### Iteration 이터레이션 💫
+## Iteration 이터레이션 💫
 
 이터레이션 프로토콜 (Iteration Protocol) : 순회가 가능한, 반복 / 순회하는 규격, 약속, 인터페이스
 즉, 자바스크립트에서 이터레이션 프로토콜을 따르는 객체는
@@ -403,7 +402,7 @@ Iteration Protocol을 따르는 자바스크립트 자료구조: Array, String, 
 
 <br>
 
-### Spread 연산자
+## Spread 연산자
 
 모든 Iterable은 spread 된다.
 
@@ -424,7 +423,7 @@ console.log(arr); // [1, 2, 3, 4, 5, 6]
 
 <br>
 
-### Destructuring Assignment 구조분해 할당
+## Destructuring Assignment 구조분해 할당
 
 구조분해 할당을 이용해서 중복성을 줄일 수 있다!
 
@@ -441,14 +440,14 @@ function display({ name, age, job }) {
 
 <br>
 
-### Set 세트
+## Set 세트
 
 배열과 비슷하지만 Set은 순서가 없으며, **중복이 불가능**하다!
 
 🗂 #set.size, #set.has, #set.forEach, #set.add, #set.delete, #set.clear
 <br>
 
-### Map 맵
+## Map 맵
 
 키와 값으로 이루어진 자료구조
 key - values
@@ -463,7 +462,7 @@ object 객체와 아주 유사하여 Map을 객체처럼, 객체를 Map처럼 �
 🗂 #map.size, #map.has, #map.get, #map.forEach, #map.set, #map.delete, #map.clear
 <br>
 
-### 비동기: 동시에 발생하지 않는다!
+## 비동기: 동시에 발생하지 않는다!
 
 Javascript Runtime Environment, 하나의 싱글 컨텍스트 스택: 싱글 쓰레드 (Single Thread)
 ![image](https://github.com/hastella/My_Study/assets/66244752/f15529d2-2759-4c4e-a442-fbcb6382ccc2)
@@ -488,7 +487,7 @@ Web APIs
 
 <br>
 
-#### Promise 프로미스
+### Promise 프로미스
 
 프로미스(Promise)는 비동기 함수의 반환 값을 다루기 위한 자바스크립트 객체. 비동기 함수는 프로미스를 반환할 수 있으며, 프로미스는 비동기 작업의 결과나 실패를 나타낸다.
 
@@ -525,14 +524,14 @@ const promise = new Promise(function(resolve, reject)) {
 **즉, 프로미스는 비동기 함수의 반환 값을 처리하기 위한 자바스크립트 객체이며, 비동기 작업의 성공과 실패를 나타낸다. 프로미스는 비동기 작업을 보다 편리하게 다룰 수 있도록 도와주는 패턴이며, .then()과 .catch()를 사용하여 결과와 오류를 처리할 수 있다.**
 <br />
 
-#### async & await
+### async & await
 
 프로미스의 개념을 사용한 문법이지만, 보다 가독성 있게 코드를 표현할 수 있다.
 비동기로 사용할 함수앞에 async 키워드를 붙여주면, 해당 함수는 항상 프로미스를 반환하게 된다.
 -> 비동기 함수를 호출하면서 호출코드 앞에 await를 붙여주면, 프로미스가 값을 반환하기를 기다렸다가 반환된 값을 변수에 할당해준다.
 <br>
 
-### JSON: Javascript Object Notation
+## JSON: Javascript Object Notation
 
 💡 data interchange format<br>
 JSON은 텍스트 형식을 사용하며, 주로 서버와 클라이언트 간의 HTTP 통신을 위해 사용된다. JSON을 객체 형태로 변환할 수 있으며, 객체 형태를 JSON으로 변환할 수도 있다.
@@ -544,7 +543,7 @@ JSON은 텍스트 형식을 사용하며, 주로 서버와 클라이언트 간�
 ❗️ Response.json( )을 통해 객체형태로 변환할 수 있다!
 <br>
 
-### Response.json( ): JS 객체로 변환해준다.
+## Response.json( ): JS 객체로 변환해준다.
 
 json() 메소드를 사용할 때, 실제로 JSON 데이터를 얻는 것이 아니라, JSON 데이터를 입력으로 사용하여 JavaScript 객체의 형태로 파싱한 결과를 얻게 된다! 이때 Response.json() 메서드는 response가 JSON 형식으로 되어 있을 것으로 가정하고, 그에 맞게 파싱을 시도해준다.<br>
 ❗️ Note that despite the method being named json(), the result is **not JSON** but is instead the result of taking JSON as input and parsing it to produce a **JS object**.
@@ -552,9 +551,9 @@ json() 메소드를 사용할 때, 실제로 JSON 데이터를 얻는 것이 아
 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 <br>
 
-### 프로토타입 객체란? : original, sample
+## 프로토타입 객체란? : original, sample
 
-❓ 프로토타입 객체를 사용하는 주된 이유는? ❗️**상속** 개념을 통한 **코드 재사용**
+❓ 프로토타입 객체를 사용하는 주된 이유는? ❗️**상속** 개념을 통한 **코드 재사용**<br>
 프로토타입은 객체 간에 속성과 메서드를 공유하는 방식으로 동작하며, 이를 통해 상속 개념을 구현할 수 있다.
 Java, C++과 같은 클래스 기반 객체지향 프로그래밍 언어와 달리 **자바스크립트는 프로토타입 기반 객체지향 프로그래밍 언어**이다. 클래스 기반 객체지향 프로그래밍 언어는 객체 생성 이전에 클래스를 정의하고 이를 통해 객체(인스턴스)를 생성한다. 하지만 프로토타입 기반 객체지향 프로그래밍 언어 (자바스크립트)는 클래스 없이도 객체를 생성할 수 있다.
 
@@ -572,7 +571,7 @@ JS 에서의 모든 객체들은 Object라는 프로토타입을 가지고 있�
 
 <br>
 
-### 인스턴스 vs. 프로토타입 레벨
+## 인스턴스 vs. 프로토타입 레벨
 
 프로토타입 레벨의 함수는 인스턴스 레벨의 함수와 달리 메모리를 공유한다.
 
@@ -610,7 +609,7 @@ Person.prototype.printName = function() {  // 프로토타입 레벨의 함수: 
 
 <br>
 
-### Scope 스코프
+## Scope 스코프
 
 변수를 참조할 수 있는 (접근할 수 있는) 유효한 범위이며, 식별자 (변수, 함수, 클래스 이름)가 유효한 범위를 나타낸다. 따라서, 선언된 위치에 따라 유효 범위가 결정된다.
 {
@@ -624,7 +623,7 @@ Person.prototype.printName = function() {  // 프로토타입 레벨의 함수: 
 🗂 #전역 변수, #전역 스코프, #지역 변수, #지역 스코프
 <br>
 
-### 🚀 Closure 클로저
+## 🚀 Closure 클로저
 
 클로저를 통해 내부함수에서 외부함수로 접근이 가능하다.
 ❓ 언제/ 어떻게 클로저를 활용하는걸까?
@@ -651,7 +650,7 @@ incCounter()  // 3
 
 <br>
 
-### 🗑 Garbage Collector 가비지 컬렉터
+## 🗑 Garbage Collector 가비지 컬렉터
 
 JavaScript, Python, Java 는 가비지 컬렉터가 자동으로 메모리를 관리해준다.
 
@@ -668,7 +667,7 @@ const local = 1;
 
 <br>
 
-### Execution Context 실행 컨텍스트
+## Execution Context 실행 컨텍스트
 
 실행 컨텍스트란 JS 엔진이 자바스크립트 코드를 실행할때 컴퓨터로부터 할당받은 메모리 공간에 코드, 변수, 함수 등 필요한 정보들을 저장해 두는 공간이다. 이 때, 코드의 실행 순서와 스코프를 기억해 준다!
 
@@ -679,7 +678,7 @@ const local = 1;
 - 외부 환경 참조 Outer Lexical Environment Reference : 각각의 블록의 부모는 누구인지?
   <br>
 
-### This : JS에서 문맥에 따라 this가 가리키는 것이 달라진다.
+## This : JS에서 문맥에 따라 this가 가리키는 것이 달라진다.
 
 자바, C#, C++ 대부분의 객체지향 프로그래밍 언어에서는 this는 항상 자신의 인스턴스 자체를 가리킨다. 정적으로 인스턴스가 만들어지는 시점에 this가 바인딩된다.
 
@@ -724,7 +723,7 @@ cat.printName(); // 고양이 이름 출력!: 냥이
 ❓ 그럼 어떻게 this가 항상 자신의 인스턴스를 가리키게 할 수 있을까?<br>❗️ 화살표 함수! 화살표 함수는 this를 바인딩하지 않는다.
 <br>
 
-### → 화살표 함수
+## → 화살표 함수
 
 화살표 함수는 렉시컬 환경에서의 this를 기억한다. 즉, 화살표 함수 밖에서 제일 근접한 스코프의 this를 가리킨다.
 
@@ -737,7 +736,7 @@ cat.printName(); // 고양이 이름 출력!: 냥이
 
 <br>
 
-### Strict Mode 엄격모드
+## Strict Mode 엄격모드
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 
@@ -764,7 +763,7 @@ add(1);
 
 <br>
 
-### ⬆️ 이벤트 버블링 Event Bubbling
+## ⬆️ 이벤트 버블링 Event Bubbling
 
 DOM에서의 특정 요소의 이벤트가 발생한 뒤, 해당 이벤트가 그 요소의 조상들에게까지 전달되어 트리거 되는 현상이다.
 div > span > button (click!)
@@ -777,7 +776,7 @@ div > span > button (click!)
 - event.target: 최초로 이벤트를 발생시킨 엘리먼트를 가리킨다.
 - this (=event.currentTarget): 현재 이벤트가 발생된 엘리먼트를 가리킨다.<br>
 
-### ⬇️ 이벤트 캡쳐링 Event Capturing
+## ⬇️ 이벤트 캡쳐링 Event Capturing
 
 DOM에서의 특정 요소의 이벤트 발생했을 때, 해당 이벤트가 최상단의 부모 요소로부터 전달되어져 내려오는 현상이다.
 html > body > div > p
@@ -790,7 +789,7 @@ event.stopPropagation()
 
 <br>
 
-### 이벤트 위임
+## 이벤트 위임
 
 개별적인 자식 요소에 이벤트 리스너를 추가하는 대신 부모 요소에 이벤트 리스너를 추가하는 것! **"event listener to a parent element"**
 
@@ -819,7 +818,7 @@ parent.addEventListener('click', function(event) {
 즉, 이벤트 위임을 사용하여 하나의 이벤트 리스너로 여러개의 자식 요소를 다룰 수 있다. 이는 코드를 더 간결하게 해주며 특히 많은 자식 요소를 다뤄야 할때 효율성을 높일 수 있다!
 <br>
 
-### Web Storage 웹 스토리지
+## Web Storage 웹 스토리지
 
 브라우저에 저장되는 키-값으로, 클라이언트에서만 조정이 가능하며 해당 url에서만 접근이 가능하다.
 
