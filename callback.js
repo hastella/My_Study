@@ -1,11 +1,7 @@
 const animals = ["cat", "dog", "puppy", "rabbit"];
 
 function callback(animal) {
-  if (animal.length < 4) {
-    return true;
-  } else {
-    return false;
-  }
+  return animal.length < 4;
 }
 
 const newAnimals = animals.filter(callback);
