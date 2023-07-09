@@ -89,6 +89,16 @@ stack과 queue 모두 일렬로 정렬된 데이터를 다루는 자료구조이
 - SSR은 초기 로딩 속도는 빠르지만 업데이트가 필요할 때마다 서버 요청이 필요하므로 효율적이지 않다.
   <br>
 
+## React는 CSR, 그럼 Next는?
+
+Next.js는 CSR과 SSR을 모두 지원하기 때문에 필요에 따라 CSR과 SSR을 조합하여 사용할 수 있다! CSR의 단점을 보완해주며 SEO를 향상시켜주고, 동적인 기능을 사용할 수 있다.
+<br>Next에서 **getStaticProps와 getServerSideProps**는 데이터를 가져오는 방법을 제공하는 함수다. Next.js의 서버 사이드 렌더링(SSR) 기능을 활용하여 페이지를 렌더링하기 전에 데이터를 미리 가져올 수 있게 해준다.
+
+- getStaticProps는 사이트가 처음 빌드될 때에 딱 한번! 데이터를 불러오는 것이다. 주로 정적인 데이터가 자주 변경되지 않는 경우에 사용한다.
+- getServerSideProps는 매 요청마다 데이터를 불러와 페이지를 렌더링한다. 동적인 컨텐츠가 자주 변경되는 경우에 사용한다. (수정사항 있으면 바로 업데이트 해주는 느낌)
+
+내 경우에는, 포트폴리오 웹사이트를 제작하는 과정에서 Next.js를 이용하여 진행하였다. 이때, 포트폴리오 소개나 형식을 수정할 경우를 위해 동적인 업데이트를 위해 getServerSideProps를 사용해 주었다.
+
 ## SPA와 MPA : 구조와 동작 방식의 차이
 
 ❓ Single Page Application & Multiple Page Application으로
