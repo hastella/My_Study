@@ -22,6 +22,11 @@
 <br>❓DOM 트리는 문서의 요소(Element)들과 구조를 표현하는 트리 구조<br>❓CSSOM 트리는 문서의 요소들에 대한 스타일 정보를 포함<br>❓렌더 트리는 실제로 화면에 렌더링되는 요소들을 포함, 표시되지 않는 요소들(head, script)은 포함되지 않는다.
 <br>
 
+## HTTP와 HTTPS!
+
+HTTP(Hypertext Transfer Protocol)와 HTTPS(Hypertext Transfer Protocol **Secure**)<br>
+HTTP는 암호화되지 않은 프로토콜이며 보안이 취약한 반면, HTTPS는 데이터의 암호화와 웹 사이트의 신원 인증을 제공하여 보안성을 강화한다!
+
 ## REST API란 무엇일까?
 
 서버 연동 작업을 할때 자주 보고 듣게 되는 REST API이지만 정확히 뭔지 정리해 보려고 한다!
@@ -897,6 +902,13 @@ parent.addEventListener('click', function(event) {
 - **세션 스토리지**: 같은 탭 내에서만 유지되는 데이터
 
 **쓰기 (setItem), 접근 (getItem), 삭제 (removeItem)**
+<br>
+
+## access 토큰과 refresh 토큰
+
+Access Token은 사용자를 인증하고 권한 부여를 확인하는 데 사용, Refresh Token은 Access Token의 갱신에 사용<br>
+Access Token이 만료된 경우 Refresh Token을 사용하여 새로운 Access Token을 발급받는다!<br>
+일반적인 흐름은 사용자가 로그인하여 Access Token과 Refresh Token을 받고, Access Token을 사용하여 API에 접근한다. Access Token이 만료되면 Refresh Token을 사용하여 새로운 Access Token을 받아와 유효 기간이 짧은 Access Token을 주기적으로 갱신할 수 있으며, 보안성을 강화할 수 있다.
 <br>
 
 # React
