@@ -904,7 +904,7 @@ parent.addEventListener('click', function(event) {
 **쓰기 (setItem), 접근 (getItem), 삭제 (removeItem)**
 <br>
 
-## access 토큰과 refresh 토큰
+## Access Token & Refresh Token
 
 Access Token은 사용자를 인증하고 권한 부여를 확인하는 데 사용, Refresh Token은 Access Token의 갱신에 사용<br>
 Access Token이 만료된 경우 Refresh Token을 사용하여 새로운 Access Token을 발급받는다!<br>
