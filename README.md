@@ -592,6 +592,7 @@ const promise = new Promise(function(resolve, reject)) {
 ### async & await의 사용법과 Promise
 
 async & await는 비동기적인 작업을 처리할 수 있는 문법으로, async 함수를 정의하면 함수 내부에서 await 키워드를 이용하여 비동기적으로 처리되는 작업이 완료될 때까지 기다린 후, 결과값을 반환하는 처리를 한다. async 함수는 항상 Promise 객체를 반환하며, await 키워드를 이용하여 비동기 처리 결과를 기다린다. async & await는 Promise를 기반으로 하며, **Promise를 보다 간결하게 사용할 수 있도록 해준다.**
+❓ async/ await가 간결하다는 이유는? <br>❗️ 기존의 비동기 처리 방식은 콜백 함수를 사용하거나 Promise 객체의 then과 catch를 연속적으로 체이닝하여 작성하여, 코드가 길어지고 가독성이 떨어진다. 하지만 async/ await를 이용하여 비동기 작업을 **동기적인 코드와 유사한 구조**로 작성할 수 있다. 이로 인해 **코드가 더 간결**해지고, 비동기 작업을 보다 **직관적으로** 이해할 수 있는 것이다!
 
 ```
 const promise = new Promise(function(resolve, reject)) {
