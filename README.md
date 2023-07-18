@@ -195,7 +195,7 @@ SPA는 하나의 HTML 페이지가 로드되고 이후에는 동적으로 데이
 Javascript Runtime Environment, 하나의 싱글 컨텍스트 스택: 싱글 쓰레드 (Single Thread)
 ![image](https://github.com/hastella/My_Study/assets/66244752/f15529d2-2759-4c4e-a442-fbcb6382ccc2)
 
-위의 이미지와 같이, 함수를 실행할 때 어떤 순서대로 동작해줄지는 call Stack에 의해 결정된다. 따라서, **자바스크립트는 기본적으로 동기적으로 진행된다.** 하지만, 동기적으로 함수가 진행되는 경우에는, 만일 함수 하나의 실행 속도가 길어지는 경우 다른 함수의 실행에도 지장을 주게 되기 때문에, 비동기적인 작업을 처리해야 할 때는 비동기 API 함수들을 사용해주는 것이 좋다.
+위의 이미지와 같이, 함수를 실행할 때 어떤 순서대로 동작해줄지는 Call Stack에 의해 결정된다. 따라서, **자바스크립트는 기본적으로 동기적으로 진행된다.** 하지만, 동기적으로 함수가 진행되는 경우에는, 만일 함수 하나의 실행 속도가 길어지는 경우 다른 함수의 실행에도 지장을 주게 되기 때문에, 비동기적인 작업을 처리해야 할 때는 비동기 API 함수들을 사용해주는 것이 좋다.
 
 자바스크립트 런타임 환경에서 제공해주는 다양한 API들을 사용할 수 있다.
 
@@ -592,6 +592,26 @@ const promise = new Promise(function(resolve, reject)) {
 ### async & await의 사용법과 Promise
 
 async & await는 비동기적인 작업을 처리할 수 있는 문법으로, async 함수를 정의하면 함수 내부에서 await 키워드를 이용하여 비동기적으로 처리되는 작업이 완료될 때까지 기다린 후, 결과값을 반환하는 처리를 한다. async 함수는 항상 Promise 객체를 반환하며, await 키워드를 이용하여 비동기 처리 결과를 기다린다. async & await는 Promise를 기반으로 하며, **Promise를 보다 간결하게 사용할 수 있도록 해준다.**
+
+```
+const promise = new Promise(function(resolve, reject)) {
+  resolve(value); // 성공시 resolve 호출
+  reject(error); // 실패시 reject 호출
+}
+
+async function myAsyncFunction() {
+  try {
+    // promise가 처리될 때까지 대기
+    const result = await promise;
+    console.log(result); // "Success!"
+  } catch (error) {
+    console.error(error); // 에러가 발생하면 에러 내용을 출력
+  }
+}
+
+myAsyncFunction();
+```
+
 <br>
 
 ## JSON: Javascript Object Notation
