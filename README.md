@@ -685,6 +685,7 @@ Object.seal 오브젝트 밀봉 수정 ✅, 추가 ❌, 삭제 ❌, 속성 재�
 Object.preventExtensions 오브젝트 확장 금지 수정 ✅, 삭제 ✅, 추가 ❌
 
 🗂 #freeze, #seal, #preventExtensions
+
 <br>
 
 ## 인스턴스 vs. 프로토타입 레벨
