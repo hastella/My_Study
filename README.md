@@ -676,6 +676,15 @@ JS 에서의 모든 객체들은 Object라는 프로토타입을 가지고 있�
 객체간 상속의 연결 고리는 **프로토타입 체인**으로 연결 되어 있다.
 ![image](https://github.com/hastella/My_Study/assets/66244752/8cd6b537-f96e-432e-9394-e0f96262289e)
 
+### 객체 불변성을 위한 동결, 밀봉, 확장 금지
+
+Object.freeze 오브젝트 동결 추가 ❌, 삭제 ❌, 수정 ❌, 속성 재정의 ❌ (writable: false, configurable: false 등을 재정의 하는 것 불가능)
+
+Object.seal 오브젝트 밀봉 수정 ✅, 추가 ❌, 삭제 ❌, 속성 재정의 ❌
+
+Object.preventExtensions 오브젝트 확장 금지 수정 ✅, 삭제 ✅, 추가 ❌
+
+🗂 #freeze, #seal, #preventExtensions
 <br>
 
 ## 인스턴스 vs. 프로토타입 레벨
