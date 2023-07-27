@@ -17,7 +17,9 @@
 // IIFE(즉시실행함수)를 사용하여 클로저를 생성합니다. IIFE 내부의 함수는 index라는 매개변수를 가지며, 이렇게 하면 각 setTimeout 함수가 고유한 index 값을 가질 수 있습니다. 따라서 올바른 인덱스가 출력됩니다.
 var arr = [10, 32, 65, 2];
 for (var i = 0; i < arr.length; i++) {
-  setTimeout(function (index) {
-    console.log("The index of this number is: " + i);
-  }, 3000);
+  (function (index) {
+    setTimeout(function () {
+      console.log("The index of this number is: " + index);
+    }, 3000);
+  })(i);
 }
