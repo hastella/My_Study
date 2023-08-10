@@ -1072,3 +1072,31 @@ const [form, setForm] = useState({
 ## TypeScript + React의 조합의 장점!
 
 정적 타입을 지원하는 typescript 언어와 react의 조합으로 우선 코드 작성중에 오류를 사전에 감지할 수 있으며, 타입을 명시적으로 지정하여 코드의 가독성 또한 높여주게 된다. 협업시에 개발자들끼리도 서로 코드를 이해하기에 도움이 된다. 정적 타입을 지정해줌으로써, 전반적인 코드의 안정성을 향상시켜 주는 것이다!
+<br>
+
+# Vue2
+
+## new + Vue (전역 객체)을 통해 통해 인스턴스 생성
+
+- el: Dom 요소 지정
+- data: data 객체 정의
+- computed: 함수로 정의, 계산된 값 리턴
+- methods: 함수로 정의, 계산된 값 리턴
+
+# Vue3
+
+## createApp을 통해 인스턴스 생성
+
+```
+import { createApp } from 'vue'
+
+createApp({
+  data() {
+    return {
+      count: 0
+    }
+  }
+}).mount('#app')
+```
+
+- mount: DOM 요소 지정
