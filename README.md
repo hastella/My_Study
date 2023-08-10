@@ -1100,3 +1100,70 @@ createApp({
 ```
 
 - mount: DOM 요소 지정
+
+## Pinia: Vue.js의 상태 관리 라이브러리 중 하나
+
+Composition API를 활용하여 간편하게 상태를 관리할 수 있도록 도와준다!
+
+### Pinia 사용 예시 코드
+
+#### 1. pinia 설정
+
+```
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import App from './App.vue'
+
+const app = createApp(App)
+const pinia = createPinia()
+
+app.use(pinia)
+app.mount('#app')
+```
+
+#### 2. 상태 정의: Pinia에서는 상태(State)를 Store라는 개념으로 정의.
+
+- Store는 모듈화된 형태로 각각의 상태와 상태 변경 메서드를 포함한다!
+
+```
+// stores/counter.js
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('counter', {
+  state: () => ({ count: 0 }),
+  actions: {
+    increment() {
+      this.count++
+    },
+    decrement() {
+      this.count--
+    },
+  },
+})
+```
+
+#### 3. 컴포넌트에서 사용:
+
+```
+<template>
+  <div>
+    <p>Count: {{ counterStore.count }}</p>
+    <button @click="counterStore.increment">Increment</button>
+    <button @click="counterStore.decrement">Decrement</button>
+  </div>
+</template>
+
+<script>
+import { useCounterStore } from '../stores/counter'
+
+export default {
+  setup() {
+    const counterStore = useCounterStore()
+
+    return {
+      counterStore,
+    }
+  },
+}
+</script>
+```
