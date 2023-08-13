@@ -1101,6 +1101,54 @@ createApp({
 
 - mount: DOM 요소 지정
 
+## .vue 확장자 파일안에 script/ template/ style
+
+```
+<script setup lang="ts">
+import HelloWorld from "./components/HelloWorld.vue";
+</script>
+```
+
+script 태그 안에는 javascript 코드를!
+
+```
+<template>
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://vuejs.org/" target="_blank">
+      <img src="@assets/vue.svg" class="logo vue" alt="Vue logo" />
+    </a>
+  </div>
+  <HelloWorld msg="Vite + Vue" />
+</template>
+```
+
+template 안에는 html 코드를!
+
+```
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
+</style>
+```
+
+style 태그 안에는 css 코드를!
+❓ **scoped** 의 역할은?
+❗️ scoped가 적용되면 해당 클래스명의 css 스타일들은 현재 파일 내에서만 적용이 된다. 즉 다른 .vue 파일에서 이름만 같은 클래스명의 css 스타일을 사용할 수 있다.
+<br>
+
 ## Pinia: Vue.js의 상태 관리 라이브러리 중 하나
 
 Composition API를 활용하여 간편하게 상태를 관리할 수 있도록 도와준다!
