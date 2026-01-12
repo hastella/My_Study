@@ -1228,3 +1228,1493 @@ export default {
 }
 </script>
 ```
+
+
+
+
+# JavaScript & React 스터디 노트
+
+## 목차
+- [JavaScript 핵심 개념](#javascript-핵심-개념)
+  - [자료형과 형변환](#자료형과-형변환)
+  - [배열 메서드](#배열-메서드)
+  - [고차 함수](#고차-함수)
+  - [객체와 복사](#객체와-복사)
+- [React 핵심 개념](#react-핵심-개념)
+  - [JSX 규칙](#jsx-규칙)
+  - [Props](#props)
+  - [리스트 렌더링](#리스트-렌더링)
+  - [순수 컴포넌트](#순수-컴포넌트)
+  - [State](#state)
+  - [Context](#context)
+  - [Reducer + Context](#reducer--context)
+  - [useRef](#useref)
+
+---
+
+## JavaScript 핵심 개념
+
+### 자료형과 형변환
+
+#### 형변환 규칙
+```javascript
+// 문자 + 숫자 = 문자 (숫자가 문자로 변환)
+'3' + 2; // '32'
+
+// 문자 - 숫자 = 숫자 (문자가 숫자로 변환)
+'3' - 2; // 1
+'abc' - 2; // NaN (숫자가 아닌 문자는 NaN)
+
+// == vs === 차이
+5 == '5';  // true (형변환 후 비교)
+5 === '5'; // false (자료형까지 비교)
+
+// falsy 값들과의 비교 주의!
+undefined == false; // false (특별한 경우)
+null == false;      // false (특별한 경우)
+0 == false;         // true
+'' == false;        // true
+```
+
+#### 특이사항
+```javascript
+// NaN의 타입
+typeof NaN;        // 'number'
+
+// undefined의 타입
+typeof undefined;  // 'undefined'
+
+// null의 타입 (언어 초창기 버그로 인해 'object')
+typeof null;       // 'object'
+
+// null 확인은 반드시 === 사용
+value === null;    // 올바른 방법
+```
+
+#### 문자열을 숫자로 변환
+```javascript
+parseInt('3.2');      // 3 (정수로만 변환)
+parseFloat('3.2');    // 3.2 (실수로 변환)
+Number('3.2');        // 3.2 (실수로 변환)
+Number('abc');        // NaN
+```
+
+#### 수학 연산자
+```javascript
+2 ** 3;           // 8 (2의 3제곱)
+Math.sqrt(9);     // 3 (제곱근)
+Math.abs(-5);     // 5 (절대값)
+```
+
+---
+
+### 배열 메서드
+
+#### 조회
+```javascript
+const arr = ['a', 'b', 'c', 'd', 'e'];
+
+// 마지막 요소 가져오기 (3가지 방법)
+arr[arr.length - 1];           // 'e'
+arr.at(arr.length - 1);        // 'e'
+arr.at(-1);                    // 'e' (가장 간편!)
+
+// 값 존재 확인
+arr.includes('c');             // true
+
+// 인덱스 찾기
+arr.indexOf('c');              // 2
+arr.lastIndexOf('c');          // 뒤에서부터 검색
+
+// 조건부 조회 간단하게
+if (['a', 'b', 'c'].includes(status)) {
+  // status가 'a', 'b', 'c' 중 하나일 때
+}
+```
+
+#### 추가/삭제
+```javascript
+const arr = [1, 2, 3];
+
+// 끝에 추가 (2가지 방법)
+arr.push(4);                   // [1, 2, 3, 4]
+arr = [...arr, 4];             // [1, 2, 3, 4]
+arr[arr.length] = 4;           // [1, 2, 3, 4]
+
+// 끝에서 제거 (2가지 방법)
+arr.pop();                     // [1, 2, 3]
+arr.splice(-1, 1);             // [1, 2, 3]
+
+// 앞에 추가 (2가지 방법)
+arr.unshift(0);                // [0, 1, 2, 3]
+arr = [0, ...arr];             // [0, 1, 2, 3]
+
+// 앞에서 제거 (2가지 방법)
+arr.shift();                   // [2, 3]
+arr.splice(0, 1);              // [2, 3]
+
+// 중간 삭제/추가
+arr.splice(1, 1);              // 인덱스 1에서 1개 삭제
+arr.splice(1, 0, 'new');       // 인덱스 1에 'new' 추가
+arr.splice(1, 1, 'replace');   // 인덱스 1을 'replace'로 교체
+```
+
+#### 변환
+```javascript
+// 배열 → 문자열
+['a', 'b', 'c'].join();        // 'a,b,c'
+['a', 'b', 'c'].join('-');     // 'a-b-c'
+
+// 문자열 → 배열
+'a,b,c'.split(',');            // ['a', 'b', 'c']
+Array.from('abc');             // ['a', 'b', 'c']
+Array(3).fill(0);              // [0, 0, 0]
+
+// concat의 차이
+[1, 2].concat([3, 4]);         // [1, 2, 3, 4]
+'hello'.concat([1, 2]);        // 'hello1,2' (배열이 문자열로 변환됨)
+```
+
+#### filter - 조건에 맞는 요소만 선택
+```javascript
+const people = [
+  { name: 'John', age: 22 },
+  { name: 'Jane', age: 16 },
+  { name: 'Bob', age: 30 }
+];
+
+// 성인만 필터링
+const adults = people.filter(person => person.age >= 18);
+// [{ name: 'John', age: 22 }, { name: 'Bob', age: 30 }]
+
+// 문자열 검색
+const fruits = ['apple', 'banana', 'grapes', 'mango'];
+const result = fruits.filter(fruit =>
+  fruit.toLowerCase().includes('ap')
+);
+// ['apple', 'grapes']
+```
+
+**filter 특징:**
+- 원본 배열을 수정하지 않고 새로운 배열 반환
+- 콜백 함수가 true를 반환하는 요소만 포함
+- 순회 메서드 (각 요소에 대해 한 번씩 호출)
+
+#### map - 배열을 변환
+```javascript
+const numbers = [1, 2, 3, 4];
+
+// 각 숫자를 2배로
+const doubled = numbers.map(num => num * 2);
+// [2, 4, 6, 8]
+
+// 객체 배열 변환
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 }
+];
+const names = users.map(user => user.name);
+// ['John', 'Jane']
+
+// 인덱스 활용
+const withIndex = numbers.map((num, index) => `${index}: ${num}`);
+// ['0: 1', '1: 2', '2: 3', '3: 4']
+```
+
+**map 특징:**
+- 원본 배열을 변형하지 않음 (단, 콜백 함수에서 변형 가능)
+- 항상 같은 길이의 새 배열 반환
+- 각 요소를 변환할 때 사용
+
+---
+
+### 고차 함수
+
+#### 함수를 만드는 함수
+```javascript
+// 고차 함수 (High Order Function)
+const hof = (a) => (b) => (c) => {
+  return a + (b * c);
+};
+
+// 단계별로 호출
+const first = hof(3);        // (b) => (c) => 3 + (b * c)
+const second = first(4);     // (c) => 3 + (4 * c)
+const third = second(5);     // 3 + (4 * 5) = 23
+console.log(third);          // 23
+
+// 한 번에 호출
+console.log(hof(3)(4)(5));   // 23
+```
+
+**활용 예시:**
+```javascript
+// 설정을 받아서 특정 기능을 하는 함수 생성
+const createMultiplier = (multiplier) => (number) => {
+  return number * multiplier;
+};
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+
+console.log(double(5));      // 10
+console.log(triple(5));      // 15
+```
+
+---
+
+### 객체와 복사
+
+#### 객체 참조
+```javascript
+// 객체는 참조로 비교
+{} === {};                   // false (다른 참조)
+const obj1 = { a: 1 };
+const obj2 = obj1;
+obj1 === obj2;               // true (같은 참조)
+```
+
+#### 얕은 복사 (Shallow Copy)
+```javascript
+const original = {
+  name: 'John',
+  age: 30,
+  address: {
+    city: 'Seoul',
+    country: 'Korea'
+  }
+};
+
+// 얕은 복사 방법들
+const copy1 = { ...original };
+const copy2 = Object.assign({}, original);
+
+// 1단계는 복사됨
+copy1.name = 'Jane';
+console.log(original.name);           // 'John' (원본 유지)
+
+// 중첩된 객체는 참조만 복사됨!
+copy1.address.city = 'Busan';
+console.log(original.address.city);   // 'Busan' (원본도 변경됨!)
+```
+
+#### 깊은 복사 (Deep Copy)
+```javascript
+const original = {
+  name: 'John',
+  profile: {
+    age: 30,
+    address: {
+      city: 'Seoul'
+    }
+  }
+};
+
+// 방법 1: JSON 사용 (간단하지만 제한적)
+const deepCopy1 = JSON.parse(JSON.stringify(original));
+// 단점: 함수, undefined, Symbol, Date 등이 제대로 복사 안 됨
+
+// 방법 2: structuredClone (최신 브라우저)
+const deepCopy2 = structuredClone(original);
+
+// 방법 3: lodash 라이브러리
+import _ from 'lodash';
+const deepCopy3 = _.cloneDeep(original);
+
+// 방법 4: 재귀 함수
+function deepCopy(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+
+  if (Array.isArray(obj)) {
+    return obj.map(item => deepCopy(item));
+  }
+
+  const copied = {};
+  for (let key in obj) {
+    copied[key] = deepCopy(obj[key]);
+  }
+  return copied;
+}
+```
+
+#### React에서의 활용
+```javascript
+const [user, setUser] = useState({
+  name: 'John',
+  profile: {
+    age: 30,
+    address: {
+      city: 'Seoul'
+    }
+  }
+});
+
+// :x: 잘못된 방법 - 얕은 복사의 문제
+const updateCity = () => {
+  const newUser = { ...user };
+  newUser.profile.address.city = 'Busan'; // 원본도 변경됨!
+  setUser(newUser);
+};
+
+// :white_check_mark: 올바른 방법 1 - 모든 단계를 복사
+const updateCity = () => {
+  setUser({
+    ...user,
+    profile: {
+      ...user.profile,
+      address: {
+        ...user.profile.address,
+        city: 'Busan'
+      }
+    }
+  });
+};
+
+// :white_check_mark: 올바른 방법 2 - Immer 사용 (추천)
+import { produce } from 'immer';
+
+const updateCity = () => {
+  setUser(produce(user, draft => {
+    draft.profile.address.city = 'Busan';
+  }));
+};
+```
+
+---
+
+## React 핵심 개념
+
+### JSX 규칙
+
+#### 1. 단일 루트 요소 필수
+```jsx
+// :x: 에러 발생
+return (
+  <div>First</div>
+  <div>Second</div>
+);
+
+// :white_check_mark: Fragment 사용
+return (
+  <>
+    <div>First</div>
+    <div>Second</div>
+  </>
+);
+
+// :white_check_mark: div로 감싸기
+return (
+  <div>
+    <div>First</div>
+    <div>Second</div>
+  </div>
+);
+```
+
+#### 2. camelCase 속성
+```jsx
+// HTML vs JSX
+<div class="container">           // HTML
+<div className="container">       // JSX
+
+<label for="name">                // HTML
+<label htmlFor="name">            // JSX
+
+<button onclick="handleClick()">  // HTML
+<button onClick={handleClick}>    // JSX
+
+// 예외: data-*, aria-* 속성은 kebab-case 유지
+<div data-id="123" aria-label="menu">
+```
+
+#### 3. 자바스크립트 표현식 삽입
+```jsx
+const name = 'John';
+const age = 30;
+
+return (
+  <div>
+    {/* 변수 */}
+    <h1>Hello, {name}!</h1>
+
+    {/* 표현식 */}
+    <p>Age: {age + 1}</p>
+
+    {/* 삼항 연산자 */}
+    <p>{age >= 18 ? 'Adult' : 'Minor'}</p>
+
+    {/* 함수 호출 */}
+    <p>{getName()}</p>
+
+    {/* 객체 (스타일) */}
+    <div style={{ color: 'red', fontSize: '20px' }}>
+      Double braces: {{ }} = outer for JS, inner for object
+    </div>
+  </div>
+);
+```
+
+#### 4. Self-Closing 태그
+```jsx
+// HTML에서는 선택적이지만 JSX에서는 필수
+<img src="..." />
+<input type="text" />
+<br />
+<hr />
+```
+
+#### 5. HTML to JSX 변환
+복잡한 HTML을 JSX로 변환할 때: https://transform.tools/html-to-jsx
+
+---
+
+### Props
+
+#### Props 전달과 받기
+```jsx
+// Props 전달
+<Avatar person={user} size={100} />
+
+// Props 받기 - 방법 1
+function Avatar(props) {
+  return <img src={props.person.imageUrl} width={props.size} />;
+}
+
+// Props 받기 - 방법 2 (구조 분해, 추천)
+function Avatar({ person, size }) {
+  return <img src={person.imageUrl} width={size} />;
+}
+
+// Props 받기 - 방법 3 (기본값 지정)
+function Avatar({ person, size = 100 }) {
+  return <img src={person.imageUrl} width={size} />;
+}
+```
+
+**주의:** 기본값은 `undefined`일 때만 적용됨
+```jsx
+<Avatar size={null} />     // size는 null (기본값 적용 안 됨)
+<Avatar size={undefined} /> // size는 100 (기본값 적용됨)
+<Avatar />                  // size는 100 (기본값 적용됨)
+```
+
+#### Props Spread
+```jsx
+// 모든 props를 하위 컴포넌트에 전달
+function Profile(props) {
+  return (
+    <div className="card">
+      <Avatar {...props} />
+    </div>
+  );
+}
+
+// 사용
+<Profile person={user} size={100} />
+// Avatar는 person과 size를 모두 받음
+```
+
+#### Children Props
+```jsx
+// Children 받기
+function Card({ children }) {
+  return (
+    <div className="card">
+      {children}
+    </div>
+  );
+}
+
+// 사용 - 태그 사이의 내용이 children으로 전달됨
+<Card>
+  <h1>Title</h1>
+  <p>Content</p>
+</Card>
+```
+
+**주의:** `children`은 예약어이므로 다른 이름(예: `c`)으로 바꿀 수 없음
+
+#### Props는 불변(Immutable)
+```jsx
+function Avatar({ person }) {
+  // :x: props 직접 변경 불가
+  person.name = 'New Name'; // 에러!
+
+  // :white_check_mark: 부모에게 변경 요청
+  return <button onClick={onPersonChange}>Change</button>;
+}
+```
+
+---
+
+### 리스트 렌더링
+
+#### Key의 중요성
+Key는 React가 어떤 항목이 변경/추가/삭제되었는지 식별하는 데 사용됩니다.
+
+```jsx
+// :white_check_mark: 좋은 예 - 고유한 ID 사용
+const users = [
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Jane' }
+];
+
+users.map(user => (
+  <User key={user.id} {...user} />
+));
+
+// :white_check_mark: 차선책 - 합성 키
+data.map(item => (
+  <Component key={`${item.name}-${item.date}`} {...item} />
+));
+
+// :x: 나쁜 예 - 인덱스 (항목 순서가 바뀔 수 있는 경우)
+data.map((item, index) => (
+  <Component key={index} {...item} />
+));
+```
+
+**인덱스를 key로 사용하면 안 되는 이유:**
+```jsx
+// 초기 상태
+[
+  <div key={0}>Apple</div>,
+  <div key={1}>Banana</div>,
+  <div key={2}>Cherry</div>
+]
+
+// Apple을 삭제한 후 (key가 변경됨!)
+[
+  <div key={0}>Banana</div>,   // 이전에는 key={1}이었음
+  <div key={1}>Cherry</div>    // 이전에는 key={2}이었음
+]
+// React는 Apple이 삭제된 게 아니라 모든 내용이 변경되었다고 판단
+```
+
+#### Key가 없을 때 대안
+```jsx
+// 1. 합성 키
+data.map(item => (
+  <Component key={`${item.name}-${item.date}`} {...item} />
+));
+
+// 2. 해시 함수
+import hash from 'object-hash';
+data.map(item => (
+  <Component key={hash(item)} {...item} />
+));
+
+// 3. UUID (권장하지 않음 - 매번 새로운 key 생성)
+import { v4 as uuidv4 } from 'uuid';
+data.map(item => (
+  <Component key={uuidv4()} {...item} />
+));
+```
+
+#### Filter와 Map 조합
+```jsx
+const people = [
+  { id: 1, name: 'John', age: 22, active: true },
+  { id: 2, name: 'Jane', age: 16, active: false },
+  { id: 3, name: 'Bob', age: 30, active: true }
+];
+
+// 성인이면서 active인 사람만 표시
+return (
+  <div>
+    {people
+      .filter(person => person.age >= 18 && person.active)
+      .map(person => (
+        <User key={person.id} {...person} />
+      ))
+    }
+  </div>
+);
+```
+
+#### 화살표 함수 주의사항
+```jsx
+// :white_check_mark: 암시적 반환 (return 생략 가능)
+data.map(item => <div key={item.id}>{item.name}</div>)
+
+// :white_check_mark: 명시적 반환 (중괄호 사용 시 return 필수!)
+data.map(item => {
+  const formatted = item.name.toUpperCase();
+  return <div key={item.id}>{formatted}</div>;
+})
+
+// :x: 중괄호 있는데 return 없음 (undefined 반환됨)
+data.map(item => {
+  <div key={item.id}>{item.name}</div>
+})
+```
+
+#### 여러 DOM 노드 렌더링
+```jsx
+// 1. Fragment 사용 (key 전달 가능)
+items.map(item => (
+  <React.Fragment key={item.id}>
+    <div>Header: {item.header}</div>
+    <div>Content: {item.content}</div>
+  </React.Fragment>
+))
+
+// 2. 고차원 컴포넌트 사용 (추천)
+function Item({ header, content }) {
+  return (
+    <>
+      <div>Header: {header}</div>
+      <div>Content: {content}</div>
+    </>
+  );
+}
+
+items.map(item => (
+  <Item key={item.id} header={item.header} content={item.content} />
+))
+```
+
+---
+
+### 순수 컴포넌트
+
+#### 순수 함수란?
+1. **동일한 입력 → 동일한 출력**
+2. **부작용(Side Effects)이 없음**
+
+```javascript
+// :white_check_mark: 순수 함수
+function add(a, b) {
+  return a + b;
+}
+
+// :x: 순수하지 않음 (외부 변수 변경)
+let count = 0;
+function increment() {
+  count++; // Side effect!
+}
+```
+
+#### React 컴포넌트 순수성 규칙
+```jsx
+// :white_check_mark: 순수한 컴포넌트
+function Greeting({ name }) {
+  return <h1>Hello, {name}!</h1>;
+}
+
+// :x: 순수하지 않음 (렌더링 중 외부 변수 변경)
+let count = 0;
+function Counter() {
+  count++; // 렌더링 중 side effect!
+  return <div>{count}</div>;
+}
+
+// :white_check_mark: State 사용으로 해결
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1); // 이벤트 핸들러에서 side effect
+  };
+
+  return <button onClick={increment}>{count}</button>;
+}
+```
+
+#### Side Effects의 예시
+```javascript
+// 1. 전역 변수 수정
+let count = 0;
+function increment() {
+  count += 1;  // Side effect!
+}
+
+// 2. 객체 상태 변경
+const person = { name: 'Alice', age: 25 };
+function updateProfile(profile) {
+  profile.name = 'Updated';  // Side effect!
+}
+
+// 3. API 호출
+function fetchData() {
+  fetch('https://api.example.com/data');  // Side effect!
+}
+
+// 4. 콘솔 로그
+function displayValue(value) {
+  console.log(value);  // Side effect!
+}
+
+// 5. DOM 조작
+function updateHeader(title) {
+  document.getElementById('header').innerText = title;  // Side effect!
+}
+```
+
+#### Side Effects 관리 방법
+```jsx
+function Component() {
+  const [data, setData] = useState(null);
+
+  // :x: 렌더링 중 side effect 금지
+  // fetch('https://api.example.com/data');
+
+  // :white_check_mark: 방법 1: 이벤트 핸들러에서
+  const handleClick = () => {
+    fetch('https://api.example.com/data')
+      .then(res => res.json())
+      .then(data => setData(data));
+  };
+
+  // :white_check_mark: 방법 2: useEffect에서 (최후의 수단)
+  useEffect(() => {
+    fetch('https://api.example.com/data')
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
+
+  return <button onClick={handleClick}>Fetch</button>;
+}
+```
+
+#### Local Mutation (허용되는 변경)
+렌더링 중 생성된 지역 변수는 변경 가능합니다.
+
+```jsx
+function TeaGathering() {
+  let cups = []; // 지역 변수
+
+  for (let i = 1; i <= 12; i++) {
+    cups.push(<Cup key={i} guest={i} />); // 지역 변경은 OK!
+  }
+
+  return cups;
+}
+```
+
+#### Strict Mode
+개발 모드에서 컴포넌트를 2번 렌더링하여 순수하지 않은 렌더링을 찾아냅니다.
+
+```jsx
+// index.js
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+
+// 부분 적용
+function App() {
+  return (
+    <>
+      <Header />
+      <StrictMode>
+        <Main />  {/* Main만 엄격 모드 */}
+      </StrictMode>
+      <Footer />
+    </>
+  );
+}
+```
+
+**Strict Mode 기능:**
+1. 컴포넌트를 2번 렌더링하여 순수성 검사
+2. Effect를 2번 실행하여 cleanup 누락 검사
+3. 더 이상 사용되지 않는 API 경고
+
+---
+
+### State
+
+#### State vs 일반 변수
+```jsx
+// :x: 일반 변수 - 렌더링 트리거 안 됨, 값 유지 안 됨
+function Counter() {
+  let count = 0; // 매번 0으로 초기화됨
+
+  const increment = () => {
+    count++; // 값은 증가하지만 UI 업데이트 안 됨
+    console.log(count); // 콘솔에는 증가된 값 출력됨
+  };
+
+  return <button onClick={increment}>{count}</button>;
+  // 화면에는 항상 0이 보임
+}
+
+// :white_check_mark: State - 렌더링 트리거, 값 유지
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1); // UI 업데이트됨!
+  };
+
+  return <button onClick={increment}>{count}</button>;
+}
+```
+
+**State가 필요한 이유:**
+1. 렌더링 간에 데이터 유지
+2. 변경 시 리렌더링 트리거
+
+#### State는 Snapshot
+State는 변경되는 것이 아니라 새로운 스냅샷을 만듭니다.
+
+```jsx
+function Counter() {
+  const [number, setNumber] = useState(0);
+
+  return (
+    <>
+      <h1>{number}</h1>
+      <button onClick={() => {
+        setNumber(number + 1);
+        setNumber(number + 1);
+        setNumber(number + 1);
+      }}>+3</button>
+    </>
+  );
+}
+// 클릭하면 +3이 아니라 +1만 됨!
+```
+
+**왜 +1만 될까?**
+```jsx
+// 렌더링 시점에 number = 0
+onClick={() => {
+  setNumber(0 + 1); // 1로 설정
+  setNumber(0 + 1); // 1로 설정 (여전히 number는 0)
+  setNumber(0 + 1); // 1로 설정 (여전히 number는 0)
+}}
+// 결과: number는 1
+```
+
+#### 함수형 업데이트 (Updater Function)
+```jsx
+// :white_check_mark: 함수형 업데이트 사용
+function Counter() {
+  const [number, setNumber] = useState(0);
+
+  return (
+    <button onClick={() => {
+      setNumber(prev => prev + 1); // prev = 0, 결과: 1
+      setNumber(prev => prev + 1); // prev = 1, 결과: 2
+      setNumber(prev => prev + 1); // prev = 2, 결과: 3
+    }}>+3</button>
+  );
+}
+// 이제 +3이 제대로 동작함!
+```
+
+#### Alert와 State
+```jsx
+function Counter() {
+  const [number, setNumber] = useState(0);
+
+  return (
+    <button onClick={() => {
+      setNumber(number + 5);
+      alert(number); // 0이 alert됨 (5가 아님!)
+    }}>+5</button>
+  );
+}
+```
+
+**왜 0이 나올까?**
+```jsx
+// 클릭 시점에 number = 0
+onClick={() => {
+  setNumber(0 + 5); // 다음 렌더링에서 5가 됨
+  alert(0);         // 현재 렌더링의 number는 여전히 0
+}}
+```
+
+#### 마지막 setState만 적용됨
+```jsx
+function Counter() {
+  const [number, setNumber] = useState(0);
+
+  return (
+    <button onClick={() => {
+      setNumber(number + 5);  // 5로 설정
+      setNumber(number + 10); // 10으로 설정 (5를 덮어씀)
+    }}>Click</button>
+  );
+}
+// 결과: number는 10
+```
+
+#### Hook 사용 규칙
+```jsx
+// :white_check_mark: 컴포넌트 최상위에서만 사용
+function Component() {
+  const [state, setState] = useState(0);
+
+  // ...
+}
+
+// :x: 조건문 안에서 사용 금지
+function Component() {
+  if (condition) {
+    const [state, setState] = useState(0); // 에러!
+  }
+}
+
+// :x: 반복문 안에서 사용 금지
+function Component() {
+  for (let i = 0; i < 10; i++) {
+    const [state, setState] = useState(0); // 에러!
+  }
+}
+
+// :x: 중첩 함수 안에서 사용 금지
+function Component() {
+  const handleClick = () => {
+    const [state, setState] = useState(0); // 에러!
+  };
+}
+```
+
+#### State 구조화 원칙
+
+**1. 관련된 State 그룹화**
+```jsx
+// :x: 분리
+const [x, setX] = useState(0);
+const [y, setY] = useState(0);
+
+// :white_check_mark: 그룹화
+const [position, setPosition] = useState({ x: 0, y: 0 });
+
+// 업데이트 시
+setPosition({ ...position, x: 100 });
+```
+
+**2. 모순 방지**
+```jsx
+// :x: 모순 가능
+const [isSending, setIsSending] = useState(false);
+const [isSent, setIsSent] = useState(false);
+// 둘 다 true일 수 있음 (모순!)
+
+// :white_check_mark: 단일 상태
+const [status, setStatus] = useState('idle');
+// 'idle' | 'sending' | 'sent'
+```
+
+**3. 불필요한 State 피하기**
+```jsx
+// :x: Props를 State로 복사 (Don't mirror props in state)
+function Message({ messageColor }) {
+  const [color, setColor] = useState(messageColor);
+  // messageColor가 바뀌어도 color는 첫 렌더링 값 유지!
+
+  return <div style={{ color }}>Message</div>;
+}
+
+// :white_check_mark: Props 직접 사용
+function Message({ messageColor }) {
+  return <div style={{ color: messageColor }}>Message</div>;
+}
+
+// :white_check_mark: Props를 초기값으로만 사용하고 싶다면 명확히 표시
+function Message({ initialColor }) {
+  const [color, setColor] = useState(initialColor);
+  // 'initial'이라는 이름으로 의도를 명확히 함
+}
+```
+
+**4. 중복 피하기**
+```jsx
+// :x: 중복
+const [items, setItems] = useState([...]);
+const [selectedItem, setSelectedItem] = useState(items[0]);
+
+// :white_check_mark: ID만 저장
+const [items, setItems] = useState([...]);
+const [selectedId, setSelectedId] = useState(0);
+const selectedItem = items.find(item => item.id === selectedId);
+```
+
+**5. 깊은 중첩 피하기**
+```jsx
+// :x: 깊게 중첩된 State
+const [data, setData] = useState({
+  user: {
+    profile: {
+      address: {
+        city: 'Seoul'
+      }
+    }
+  }
+});
+
+// 업데이트가 복잡함
+setData({
+  ...data,
+  user: {
+    ...data.user,
+    profile: {
+      ...data.user.profile,
+      address: {
+        ...data.user.profile.address,
+        city: 'Busan'
+      }
+    }
+  }
+});
+
+// :white_check_mark: 평탄하게 구조화
+const [user, setUser] = useState({...});
+const [profile, setProfile] = useState({...});
+const [address, setAddress] = useState({ city: 'Seoul' });
+
+// 업데이트가 간단함
+setAddress({ ...address, city: 'Busan' });
+
+// :white_check_mark: 또는 Immer 사용
+import { produce } from 'immer';
+setData(produce(data, draft => {
+  draft.user.profile.address.city = 'Busan';
+}));
+```
+
+---
+
+### Context
+
+#### Props Drilling 문제
+```jsx
+// :x: Props Drilling
+function App() {
+  const [theme, setTheme] = useState('dark');
+
+  return <Page theme={theme} />;
+}
+
+function Page({ theme }) {
+  return <Section theme={theme} />;
+}
+
+function Section({ theme }) {
+  return <Button theme={theme} />;
+}
+
+function Button({ theme }) {
+  return <button className={theme}>Click</button>;
+}
+```
+
+#### Context로 해결
+```jsx
+// 1. Context 생성 (ThemeContext.js)
+import { createContext } from 'react';
+
+export const ThemeContext = createContext('light'); // 기본값
+
+// 2. Provider로 감싸기
+function App() {
+  const [theme, setTheme] = useState('dark');
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <Page />
+    </ThemeContext.Provider>
+  );
+}
+
+// 3. useContext로 사용
+function Button() {
+  const theme = useContext(ThemeContext);
+  return <button className={theme}>Click</button>;
+}
+
+// Page와 Section은 theme을 전달할 필요 없음!
+function Page() {
+  return <Section />;
+}
+
+function Section() {
+  return <Button />;
+}
+```
+
+#### Context 중첩 사용
+```jsx
+import { useContext } from 'react';
+import { LevelContext } from './LevelContext.js';
+
+// 같은 컴포넌트가 중첩될수록 level 값이 증가
+export default function Section({ children }) {
+  const level = useContext(LevelContext);
+
+  return (
+    <section className="section">
+      <LevelContext.Provider value={level + 1}>
+        {children}
+      </LevelContext.Provider>
+    </section>
+  );
+}
+
+// 사용
+<Section>           {/* level = 1 */}
+  <Heading />       {/* level = 1 */}
+  <Section>         {/* level = 2 */}
+    <Heading />     {/* level = 2 */}
+    <Section>       {/* level = 3 */}
+      <Heading />   {/* level = 3 */}
+    </Section>
+  </Section>
+</Section>
+```
+
+#### Context 사용 전에 고려할 것
+
+**1. Props 먼저 시도**
+```jsx
+// Props는 명시적이라 이해하기 쉬움
+<Button theme="dark" onClick={handleClick} />
+```
+
+**2. Children Props 활용**
+```jsx
+// :white_check_mark: Children으로 직접 전달
+<Layout>
+  <NeedInfo posts={posts} />
+</Layout>
+
+// :x: Layout을 거쳐서 전달
+<Layout posts={posts} />
+```
+
+#### Context 사용 시기
+- Theme (다크/라이트 모드)
+- 현재 로그인한 사용자 정보
+- 라우팅
+- 상태 관리 (많은 컴포넌트에서 필요한 상태)
+
+---
+
+### Reducer + Context
+
+복잡한 State 로직과 Context를 결합하여 전역 상태 관리를 구현합니다.
+
+```jsx
+// 1. Reducer 정의 (tasksReducer.js)
+export function tasksReducer(tasks, action) {
+  switch (action.type) {
+    case 'added': {
+      return [...tasks, {
+        id: action.id,
+        text: action.text,
+        done: false
+      }];
+    }
+    case 'changed': {
+      return tasks.map(t => {
+        if (t.id === action.task.id) {
+          return action.task;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return tasks.filter(t => t.id !== action.id);
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
+    }
+  }
+}
+
+// 2. Context 생성 (TasksContext.js)
+import { createContext } from 'react';
+
+export const TasksContext = createContext(null);
+export const TasksDispatchContext = createContext(null);
+
+// 3. Provider 컴포넌트 생성
+import { useReducer } from 'react';
+import { TasksContext, TasksDispatchContext } from './TasksContext.js';
+import { tasksReducer } from './tasksReducer.js';
+
+export function TasksProvider({ children }) {
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
+  return (
+    <TasksContext.Provider value={tasks}>
+      <TasksDispatchContext.Provider value={dispatch}>
+        {children}
+      </TasksDispatchContext.Provider>
+    </TasksContext.Provider>
+  );
+}
+
+const initialTasks = [
+  { id: 0, text: 'Philosopher's Path', done: true },
+  { id: 1, text: 'Visit the temple', done: false },
+  { id: 2, text: 'Drink matcha', done: false }
+];
+
+// 4. App에서 Provider 사용
+import { TasksProvider } from './TasksContext.js';
+
+export default function App() {
+  return (
+    <TasksProvider>
+      <TaskList />
+      <AddTask />
+    </TasksProvider>
+  );
+}
+
+// 5. 컴포넌트에서 사용
+import { useContext } from 'react';
+import { TasksContext, TasksDispatchContext } from './TasksContext.js';
+
+function TaskList() {
+  const tasks = useContext(TasksContext);
+  return (
+    <ul>
+      {tasks.map(task => (
+        <Task key={task.id} task={task} />
+      ))}
+    </ul>
+  );
+}
+
+function Task({ task }) {
+  const dispatch = useContext(TasksDispatchContext);
+
+  return (
+    <li>
+      <input
+        type="checkbox"
+        checked={task.done}
+        onChange={e => {
+          dispatch({
+            type: 'changed',
+            task: {
+              ...task,
+              done: e.target.checked
+            }
+          });
+        }}
+      />
+      {task.text}
+      <button onClick={() => {
+        dispatch({
+          type: 'deleted',
+          id: task.id
+        });
+      }}>Delete</button>
+    </li>
+  );
+}
+
+function AddTask() {
+  const [text, setText] = useState('');
+  const dispatch = useContext(TasksDispatchContext);
+
+  return (
+    <>
+      <input
+        value={text}
+        onChange={e => setText(e.target.value)}
+      />
+      <button onClick={() => {
+        setText('');
+        dispatch({
+          type: 'added',
+          id: nextId++,
+          text: text,
+        });
+      }}>Add</button>
+    </>
+  );
+}
+
+let nextId = 3;
+```
+
+**핵심 포인트:**
+- State와 Dispatch를 별도의 Context로 분리
+- 하위 컴포넌트에서 Props Drilling 없이 사용 가능
+- 복잡한 State 로직을 Reducer로 관리
+
+---
+
+### useRef
+
+#### State vs Ref 비교
+```jsx
+// State - 변경 시 리렌더링 발생
+const [count, setCount] = useState(0);
+setCount(1); // 리렌더링 ✓
+
+// Ref - 변경해도 리렌더링 없음
+const countRef = useRef(0);
+countRef.current = 1; // 리렌더링 ✗
+```
+
+#### useRef 구조
+```jsx
+const ref = useRef(0);
+
+// 내부 구조
+{
+  current: 0  // useRef에 전달한 값
+}
+
+// 값 읽기
+console.log(ref.current); // 0
+
+// 값 변경
+ref.current = 1;
+```
+
+#### useRef 사용 시나리오
+
+**1. 리렌더링 없이 값 저장**
+```jsx
+function Stopwatch() {
+  const [time, setTime] = useState(0);
+  const intervalRef = useRef(null);
+
+  const start = () => {
+    // 타이머 ID를 ref에 저장
+    intervalRef.current = setInterval(() => {
+      setTime(t => t + 1);
+    }, 1000);
+  };
+
+  const stop = () => {
+    // ref에서 타이머 ID를 가져와서 정지
+    clearInterval(intervalRef.current);
+  };
+
+  return (
+    <div>
+      <p>Time: {time}s</p>
+      <button onClick={start}>Start</button>
+      <button onClick={stop}>Stop</button>
+    </div>
+  );
+}
+```
+
+**2. 이전 값 기억하기**
+```jsx
+function Component({ value }) {
+  const prevValueRef = useRef(null);
+
+  useEffect(() => {
+    prevValueRef.current = value;
+  }, [value]);
+
+  const prevValue = prevValueRef.current;
+
+  return (
+    <div>
+      <p>Current: {value}</p>
+      <p>Previous: {prevValue}</p>
+    </div>
+  );
+}
+```
+
+**3. DOM 요소 참조**
+```jsx
+function TextInput() {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={focusInput}>Focus</button>
+    </>
+  );
+}
+```
+
+**4. 렌더링 횟수 추적**
+```jsx
+function Component() {
+  const renderCount = useRef(0);
+
+  // 렌더링마다 증가 (리렌더링 유발 안 함)
+  renderCount.current++;
+
+  return <div>Render count: {renderCount.current}</div>;
+}
+```
+
+#### Ref 사용 시 주의사항
+```jsx
+// :x: 렌더링 중 ref.current 읽기/쓰기 금지
+function Component() {
+  const ref = useRef(0);
+  ref.current++; // 순수성 위반!
+
+  return <div>{ref.current}</div>;
+}
+
+// :white_check_mark: 이벤트 핸들러나 useEffect에서만 사용
+function Component() {
+  const ref = useRef(0);
+
+  const handleClick = () => {
+    ref.current++; // OK!
+  };
+
+  useEffect(() => {
+    ref.current++; // OK!
+  }, []);
+
+  return <button onClick={handleClick}>Click</button>;
+}
+```
+
+---
+
+## 핵심 요약
+
+### JavaScript
+1. **형변환**: `==` vs `===`, 문자+숫자=문자, 문자-숫자=숫자
+2. **배열**: `filter()`, `map()`, `includes()`, `at(-1)`
+3. **고차 함수**: 함수를 반환하는 함수
+4. **복사**: 얕은 복사 vs 깊은 복사, React에서는 불변성 유지 필수
+
+### React 기초
+1. **JSX**: 단일 루트, camelCase, `{표현식}`, self-closing
+2. **Props**: 컴포넌트 간 데이터 전달, children, spread
+3. **Key**: 리스트 렌더링 시 고유 식별자 (인덱스 사용 지양)
+4. **순수성**: 렌더링 중 side effect 금지, 이벤트 핸들러나 useEffect에서 처리
+
+### React State
+1. **useState**: 값 유지 + 리렌더링 트리거
+2. **Snapshot**: State는 변경이 아닌 스냅샷, 함수형 업데이트 사용
+3. **구조화**: 그룹화, 모순 방지, 중복 피하기, Props 복사 금지
+
+### React 고급
+1. **Context**: Props Drilling 해결, 전역 상태 관리
+2. **Reducer + Context**: 복잡한 로직 + 전역 상태
+3. **useRef**: 리렌더링 없이 값 저장, DOM 참조
+
+---
+
+## 참고 자료
+- [React 공식 문서](https://react.dev)
+- [MDN Web Docs](https://developer.mozilla.org)
+- [JavaScript 표준 내장 객체](https://tc39.es/ecma262)
+- [HTML to JSX 변환기](https://transform.tools/html-to-jsx)
