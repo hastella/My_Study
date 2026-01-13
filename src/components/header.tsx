@@ -1,25 +1,28 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { useTheme } from 'next-themes'
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useTheme } from "next-themes";
 
 export default function Header() {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--border)]">
       <nav className="container flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center space-x-2 text-xl font-bold">
+        <Link
+          href="/"
+          className="flex items-center space-x-2 text-xl font-bold"
+        >
           <span className="text-2xl">📚</span>
           <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
             My Study Notes
@@ -47,14 +50,14 @@ export default function Header() {
           </Link>
 
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="p-2 rounded-lg hover:bg-[var(--muted)] transition-colors"
             aria-label="테마 전환"
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === "dark" ? "☀️" : "🌙"}
           </button>
         </div>
       </nav>
     </header>
-  )
+  );
 }
