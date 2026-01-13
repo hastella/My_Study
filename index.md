@@ -23,11 +23,11 @@ description: "프론트엔드 개발 공부 기록"
 
 ## 📂 카테고리
 
-- [Web 기본 개념]({% link categories.html %}#web-basics)
-- [HTML/CSS]({% link categories.html %}#html-css)
-- [JavaScript]({% link categories.html %}#javascript)
-- [React]({% link categories.html %}#react)
-- [Vue.js]({% link categories.html %}#vue)
+- Web 기본 개념
+- HTML/CSS
+- JavaScript
+- React
+- Vue.js
 
 ## 🔗 링크
 
@@ -37,3 +37,4 @@ description: "프론트엔드 개발 공부 기록"
 ---
 
 *지속적인 학습과 성장의 여정을 함께 나누고 싶습니다.*
+

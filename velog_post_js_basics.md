@@ -199,3 +199,4 @@ console.log(sangchu); // ReferenceError: sangchu is not defined
 - **인스턴스 (instance)**: 클래스를 통해 만들어진 객체
 
 JavaScript의 기초 개념들을 정리해보았습니다. 다음 포스트에서는 JavaScript의 고급 개념들과 실제 활용 방법에 대해 알아보겠습니다! 🚀
+
