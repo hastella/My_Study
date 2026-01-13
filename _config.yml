@@ -9,6 +9,14 @@ markdown: kramdown
 highlighter: rouge
 theme: minima
 
+# Sass settings
+sass:
+  style: compressed
+
+# Include custom CSS
+include:
+  - _pages
+
 # Collections
 collections:
   posts:
