@@ -21,7 +21,7 @@ export function getPostSlugs() {
 }
 
 // Git 커밋 날짜를 가져오는 함수
-function getGitCommitDate(filePath: string): string {
+function getGitCommitDate(filePath: string): string | null {
   try {
     // git log --follow --format=%ai --date=iso -1 [파일경로]
     const gitCommand = `git log --follow --format=%ai --date=iso -1 -- "${filePath}"`;
@@ -70,7 +70,11 @@ export function getPostBySlug(slug: string): Post {
     publishedAt: publishedAt, // 정렬용 발행일 (Git 커밋 날짜 우선)
     excerpt: data.excerpt || content.slice(0, 200) + "...",
     content,
-    categories: data.categories || [],
+    categories: Array.isArray(data.categories)
+      ? data.categories
+      : data.categories
+      ? [data.categories]
+      : [],
     tags: data.tags || [],
   };
 }

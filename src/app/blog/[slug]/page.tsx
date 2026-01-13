@@ -9,14 +9,10 @@ interface PostPageProps {
 }
 
 export async function generateStaticParams() {
-  return [
-    { slug: '2026-01-13-typescript-기초부터-고급까지' },
-    { slug: '2024-01-17-vue-basics' },
-    { slug: '2024-01-16-react-basics' },
-    { slug: '2024-01-15-javascript-basics' },
-    { slug: '2024-01-14-html-css-basics' },
-    { slug: '2024-01-13-web-basics' },
-  ]
+  const slugs = getPostSlugs()
+  return slugs.map((slug) => ({
+    slug: slug.replace(/\.md$/, '')
+  }))
 }
 
 export async function generateMetadata({ params }: PostPageProps) {

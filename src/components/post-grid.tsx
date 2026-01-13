@@ -73,15 +73,7 @@ export default function PostGrid({ posts }: PostGridProps) {
             </time>
           </div>
 
-          <Link
-            href={
-              post.slug === "2026-01-13-typescript-기초부터-고급까지"
-                ? "/blog/typescript-basics"
-                : post.slug === "2024-01-17-vue-basics"
-                ? "/blog/vue-basics"
-                : `/blog/${post.slug}`
-            }
-          >
+          <Link href={`/blog/${post.slug}`}>
             <h3 className="text-xl font-bold mb-3 text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors line-clamp-2">
               {post.title}
             </h3>

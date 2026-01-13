@@ -47,13 +47,6 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
             );
           },
 
-          // 인라인 코드
-          inlineCode: ({ children }) => (
-            <code className="bg-[var(--muted)] px-2 py-1 rounded text-sm font-mono">
-              {children}
-            </code>
-          ),
-
           // 링크
           a: ({ href, children }) => (
             <a
