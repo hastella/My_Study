@@ -10,9 +10,11 @@ interface PostPageProps {
 
 export async function generateStaticParams() {
   const slugs = getPostSlugs()
-  return slugs.map((slug) => ({
-    slug: slug.replace(/\.md$/, '')
-  }))
+  return slugs
+    .map((slug) => slug.replace(/\.md$/, ''))
+    .filter((slug) => slug !== '2026-01-13-typescript-기초부터-고급까지')
+    .concat(['typescript-basics'])
+    .map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: PostPageProps) {

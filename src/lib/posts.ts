@@ -42,7 +42,14 @@ function getGitCommitDate(filePath: string): string | null {
 
 export function getPostBySlug(slug: string): Post {
   const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = path.join(postsDirectory, `${realSlug}.md`);
+
+  // Special slug mapping for posts with problematic filenames
+  const slugMapping: Record<string, string> = {
+    'typescript-basics': '2026-01-13-typescript-기초부터-고급까지'
+  };
+
+  const actualSlug = slugMapping[realSlug] || realSlug;
+  const fullPath = path.join(postsDirectory, `${actualSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
