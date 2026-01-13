@@ -1,0 +1,37 @@
+# Site settings
+title: "My Study Notes"
+description: "프론트엔드 개발 공부 기록"
+url: "https://hastella.github.io"
+baseurl: "/My_Study"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Collections
+collections:
+  posts:
+    output: true
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+
+# Include files
+include:
+  - _pages
+
+# Author
+author: hastella
