@@ -1,5 +1,41 @@
 {
+  "name": "my-study-blog",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "update-posts": "node scripts/update-post-dates.js",
+    "create-post": "node scripts/create-post.js"
+  },
   "dependencies": {
-    "lodash": "^4.17.21"
-  }
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^20.3.3",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6",
+    "autoprefixer": "10.4.14",
+    "dotenv": "^16.3.1",
+    "eslint": "8.43.0",
+    "eslint-config-next": "13.4.7",
+    "gray-matter": "^4.0.3",
+    "next": "13.4.7",
+    "next-themes": "^0.2.1",
+    "postcss": "8.4.24",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.10.1",
+    "react-markdown": "^10.1.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "swiper": "^12.0.3",
+    "tailwindcss": "3.3.2",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {}
 }

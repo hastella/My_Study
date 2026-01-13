@@ -1,6 +1,6 @@
 # Site settings
 title: "My Study Notes"
-description: "프론트엔드 개발 공부 기록"
+description: "프론트엔드 개발자로서의 성장 과정을 기록하는 공간입니다"
 url: "https://hastella.github.io"
 baseurl: "/My_Study"
 
@@ -22,8 +22,13 @@ collections:
   posts:
     output: true
 
+# Pagination
+pagination:
+  enabled: true
+
 # Plugins
 plugins:
+  - jekyll-paginate
   - jekyll-feed
   - jekyll-sitemap
 
